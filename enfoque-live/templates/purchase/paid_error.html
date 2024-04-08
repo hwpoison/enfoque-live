@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<div id="caja" class="flex items-center justify-center py-5 lg:pt-12 h-auto">
+   <div class="main bg-white rounded-lg shadow-md p-10 transition-transform w-full mx-10 lg:w-1/2 text-center">
+      <h3 class="text-2xl font-bold mb-4 text-red-700">Error de pago</h3>
+      <p class="text-light text-sm">Parece ser que tu pago fué rechazado.</p>
+      <img src="/static/banner.png" alt="Imagen de acceso" class="w-64 h-full mx-auto mb-6">
+      <a href="/comprar" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-10">Reintentar</a>
+   </div>
+</div>
+<style>
+body {
+  background-image: url('/static/background.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+</style>
+{% endblock %}

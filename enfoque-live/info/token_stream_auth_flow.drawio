@@ -1,0 +1,111 @@
+<mxfile host="app.diagrams.net" modified="2024-04-07T19:48:36.864Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0" etag="R9EpDE2cMkXgbltsMcmS" version="24.2.2" type="device">
+  <diagram name="Página-1" id="AWwC8oNLOrc3WNBsgSZh">
+    <mxGraphModel dx="1035" dy="544" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="txhifMig_9-pmAo2RSfU-2" value="Incoming request" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="10" width="280" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="txhifMig_9-pmAo2RSfU-3" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.465;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="txhifMig_9-pmAo2RSfU-2" target="txhifMig_9-pmAo2RSfU-4">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="270" as="sourcePoint" />
+            <mxPoint x="360" y="140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="txhifMig_9-pmAo2RSfU-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="txhifMig_9-pmAo2RSfU-4" target="txhifMig_9-pmAo2RSfU-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="txhifMig_9-pmAo2RSfU-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="txhifMig_9-pmAo2RSfU-4">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="531" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="txhifMig_9-pmAo2RSfU-4" value="Has identity on the JWT?" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="241" y="200" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="txhifMig_9-pmAo2RSfU-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="txhifMig_9-pmAo2RSfU-8" target="txhifMig_9-pmAo2RSfU-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="181" y="370" />
+              <mxPoint x="70" y="370" />
+              <mxPoint x="70" y="195" />
+              <mxPoint x="180" y="195" />
+              <mxPoint x="180" y="40" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="txhifMig_9-pmAo2RSfU-8" value="Give one with Footprint as identity" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="121" y="320" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="txhifMig_9-pmAo2RSfU-14" value="No" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="181" y="218" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="txhifMig_9-pmAo2RSfU-21" value="Yes" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="461" y="218" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="txhifMig_9-pmAo2RSfU-22" value="Generate Footprint" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="271" y="110" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="txhifMig_9-pmAo2RSfU-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="txhifMig_9-pmAo2RSfU-30" target="txhifMig_9-pmAo2RSfU-32">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="txhifMig_9-pmAo2RSfU-35" value="No" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="txhifMig_9-pmAo2RSfU-34">
+          <mxGeometry x="-0.6" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="txhifMig_9-pmAo2RSfU-30" value="The requested token has a binded footprint?" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="421" y="320" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="txhifMig_9-pmAo2RSfU-38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="txhifMig_9-pmAo2RSfU-32" target="txhifMig_9-pmAo2RSfU-36">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="700" y="490" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="txhifMig_9-pmAo2RSfU-32" value="Bind the current footprint to the token data" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="241" y="460" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="txhifMig_9-pmAo2RSfU-41" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="txhifMig_9-pmAo2RSfU-36" target="txhifMig_9-pmAo2RSfU-40">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="txhifMig_9-pmAo2RSfU-36" value="Procedd with verification" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="710" y="460" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="txhifMig_9-pmAo2RSfU-37" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.553;entryY=-0.017;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="txhifMig_9-pmAo2RSfU-30" target="txhifMig_9-pmAo2RSfU-36">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="txhifMig_9-pmAo2RSfU-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="txhifMig_9-pmAo2RSfU-40" target="txhifMig_9-pmAo2RSfU-42">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="785" y="680" />
+              <mxPoint x="1020" y="680" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="txhifMig_9-pmAo2RSfU-47" value="Yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="txhifMig_9-pmAo2RSfU-46">
+          <mxGeometry x="-0.1228" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="txhifMig_9-pmAo2RSfU-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="txhifMig_9-pmAo2RSfU-40" target="txhifMig_9-pmAo2RSfU-43">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="txhifMig_9-pmAo2RSfU-50" value="&lt;div&gt;No&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="txhifMig_9-pmAo2RSfU-49">
+          <mxGeometry x="-0.5156" y="4" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="txhifMig_9-pmAo2RSfU-40" value="Token binded footprint match with the request token identity?" style="shape=trapezoid;perimeter=trapezoidPerimeter;whiteSpace=wrap;html=1;fixedSize=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="595" y="590" width="380" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="txhifMig_9-pmAo2RSfU-42" value="Give access to the content" style="rounded=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;labelBorderColor=none;fillColor=#d5e8d4;strokeColor=#4FD158;" vertex="1" parent="1">
+          <mxGeometry x="980" y="740" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="txhifMig_9-pmAo2RSfU-43" value="Denied" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="490" y="790" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

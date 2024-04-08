@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block content %}
+<div id="caja" class="flex items-center justify-center py-5 lg:pt-12 h-auto">
+   <div class="main bg-white rounded-lg shadow-md p-10 transition-transform w-full mx-10 lg:w-1/2 text-center">
+      <h3 class="text-2xl font-bold mb-4">Comprar link de acceso</h3>
+      <p class="text-light text-sm">Este enlace te permitirá a acceder a una transmisión en vivo exclusiva de Enfoque Fútbol.</p>
+      <img src="/static/banner.png" alt="Imagen de acceso" class="w-64 h-full mx-auto mb-6">
+      <p class="text-light text-sm">Este link es instransferible, no se puede compartir y una vez abierto será posible acceder solo desde el dispositivo en que fue abierto por primera vez.</p>
+      
+      <p>¡Obtén acceso exclusivo ahora mismo!</p>
+        <div id="wallet_container" class="mt-2 lg:mt-9"></div>
+        <span class="spinner"></span>
+   </div>
+</div>
+<script src="https://sdk.mercadopago.com/js/v2"></script>
+<script>
+  const renderMPButton = (preferenceId) => {
+    const mp = new MercadoPago("{{ public_key }}", {
+      locale: 'es-AR'
+    });
+    spinner = document.querySelector(".spinner")
+    setTimeout(()=>{spinner.remove();}, 900);
+    spinner.classList.add("spinner-removed");
+
+    mp.bricks().create("wallet", "wallet_container", {
+      initialization: {
+          preferenceId: preferenceId.id,
+      },
+    });
+  }
+  async function renderButton(){
+    const response = await fetch("/get_preference", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+    const preference = await response.json()
+    renderMPButton(preference)
+  }
+  renderButton();
+</script>
+<style>
+body {
+  background-image: url('/static/background.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid #FFF;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+.spinner::after {
+  content: '';  
+  box-sizing: border-box;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 3px solid;
+  border-color: #FF3D00 transparent;
+}
+.spinner {
+  transition: opacity 0.5s ease; /* Transición de opacidad */
+}
+
+.spinner-removed {
+  opacity: 0; /* Oculta el elemento cuando se elimina */
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 
+</style>
+{% endblock %}

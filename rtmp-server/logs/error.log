@@ -1,0 +1,50 @@
+2024/04/07 13:21:57 [emerg] 8700#1584: CreateDirectory() "D:\Guillermo\Programacion\Python\enfoque-live\rtmp-server/temp/client_body_temp" failed (3: The system cannot find the path specified)
+2024/04/07 13:22:09 [notice] 6028#8148: using the "select" event method
+2024/04/07 13:22:09 [notice] 6028#8148: nginx/1.14.1
+2024/04/07 13:22:09 [info] 6028#8148: OS: 260210 build:9200, "Service Pack 1", suite:300, type:1
+2024/04/07 13:22:09 [notice] 6028#8148: start worker processes
+2024/04/07 13:22:09 [notice] 6028#8148: start worker process 6808
+2024/04/07 13:22:09 [notice] 6808#6632: nginx/1.14.1
+2024/04/07 13:22:09 [info] 6808#6632: OS: 260210 build:9200, "Service Pack 1", suite:300, type:1
+2024/04/07 13:22:09 [notice] 6808#6632: create thread 3916
+2024/04/07 13:22:09 [notice] 6808#6632: create thread 9248
+2024/04/07 13:22:09 [notice] 6808#6632: create thread 7764
+2024/04/07 13:22:22 [error] 6808#3916: *2 CreateFile() "D:\Guillermo\Programacion\Python\enfoque-live\rtmp-server/html/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /favicon.ico HTTP/1.1", host: "127.0.0.1:8085", referrer: "http://127.0.0.1:8085/"
+2024/04/07 13:22:25 [error] 6808#3916: *4 directory index of "D:\Guillermo\Programacion\Python\enfoque-live\rtmp-server/hls//" is forbidden, client: 127.0.0.1, server: , request: "GET /hls/ HTTP/1.1", host: "127.0.0.1:8085"
+2024/04/07 13:29:01 [notice] 11084#10672: signal process started
+2024/04/07 13:29:01 [notice] 6028#8148: reconfiguring
+2024/04/07 13:29:01 [notice] 6028#8148: using the "select" event method
+2024/04/07 13:29:01 [notice] 6028#8148: start worker processes
+2024/04/07 13:29:01 [notice] 6028#8148: start worker process 8168
+2024/04/07 13:29:01 [notice] 8168#5932: nginx/1.14.1
+2024/04/07 13:29:01 [info] 8168#5932: OS: 260210 build:9200, "Service Pack 1", suite:300, type:1
+2024/04/07 13:29:01 [notice] 6808#6632: gracefully shutting down
+2024/04/07 13:29:01 [notice] 8168#5932: create thread 1360
+2024/04/07 13:29:01 [notice] 6808#9248: exiting
+2024/04/07 13:29:01 [notice] 8168#5932: create thread 10700
+2024/04/07 13:29:01 [notice] 8168#5932: create thread 8940
+2024/04/07 13:29:02 [notice] 6808#3916: exiting
+2024/04/07 13:29:02 [notice] 6808#6632: exit
+2024/04/07 13:29:02 [notice] 6028#8148: worker process 6808 exited with code 0
+2024/04/07 13:29:11 [info] 8168#1360: *6 client connected '127.0.0.1'
+2024/04/07 13:29:11 [info] 8168#1360: *6 connect: app='hls' args='' flashver='FMLE/3.0 (compatible; FMSc/1.0)' swf_url='rtmp://127.0.0.1/hls' tc_url='rtmp://127.0.0.1/hls' page_url='' acodecs=0 vcodecs=0 object_encoding=0, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/04/07 13:29:11 [info] 8168#1360: *6 createStream, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/04/07 13:29:11 [info] 8168#1360: *6 publish: name='stream' args='' type=live silent=0, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/04/07 19:59:39 [info] 8168#1360: *6 deleteStream, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/04/07 19:59:39 [info] 8168#1360: *6 WSARecv() failed (10053: An established connection was aborted by the software in your host machine), client: 127.0.0.1, server: 0.0.0.0:1935
+2024/04/07 19:59:39 [info] 8168#1360: *6 disconnect, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/04/07 19:59:39 [info] 8168#1360: *6 deleteStream, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/04/07 22:23:29 [notice] 6028#8148: worker process 8168 exited with code 1
+2024/04/07 22:23:29 [notice] 6028#8148: start worker process 14316
+2024/04/07 22:23:29 [notice] 14316#11936: nginx/1.14.1
+2024/04/07 22:23:29 [info] 14316#11936: OS: 260210 build:9200, "Service Pack 1", suite:300, type:1
+2024/04/07 22:23:29 [notice] 14316#11936: create thread 16040
+2024/04/07 22:23:29 [notice] 14316#11936: create thread 10884
+2024/04/07 22:23:29 [notice] 14316#11936: create thread 2520
+2024/04/07 22:23:30 [notice] 6028#8148: worker process 14316 exited with code 1
+2024/04/07 22:23:30 [notice] 6028#8148: start worker process 13256
+2024/04/07 22:23:30 [notice] 13256#13092: nginx/1.14.1
+2024/04/07 22:23:30 [info] 13256#13092: OS: 260210 build:9200, "Service Pack 1", suite:300, type:1
+2024/04/07 22:23:30 [notice] 13256#13092: create thread 6920
+2024/04/07 22:23:30 [notice] 13256#13092: create thread 5208
+2024/04/07 22:23:30 [notice] 13256#13092: create thread 13244
