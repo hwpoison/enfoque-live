@@ -3,7 +3,6 @@ import configuration
 
 DB_FILENAME = configuration.get("tokens_db_name")
 
-
 def create_table():
     conn = sqlite3.connect(DB_FILENAME)
     cursor = conn.cursor()
@@ -196,3 +195,12 @@ def set_footprint(token, new_footprint):
 
     conn.commit()
     conn.close()
+
+
+if __name__ == "__main__":
+    conn = sqlite3.connect(DB_FILENAME)
+    cursor = conn.cursor()
+
+    cursor.execute("select * from tokens")
+
+    print(cursor.fetchall())

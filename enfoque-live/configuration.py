@@ -1,36 +1,44 @@
 import configparser
+import logging
+import os
 
-
-filename = "config.ini"
+config_filename = "config.ini"
 section = "DEFAULT"
 
 """
 A simple way to share variables between Gunicorn workers. 
-TODO: Solve the intensive IO activity over the conf file every each get/set
 """
 
 config = configparser.ConfigParser()
+config.read(config_filename)
 
+last_modification = os.path.getmtime(config_filename)
+
+def was_modified():
+    global last_modification;
+    if (current:=os.path.getmtime(config_filename)) > last_modification:
+        last_modification = current
+        config.read(config_filename)
+        print("[+] Reloading configuration file")
 
 def get(key):
-    config.read(filename)
+    was_modified()
     if section in config and key in config[section]:
         return config[section][key]
     else:
         return None
 
-
 def set(key, value):
-    config.read(filename)
+    was_modified()
     if section not in config:
         config[section] = {}
     config[section][key] = value
-    with open(filename, 'w') as configfile:
+    with open(config_filename, 'w') as configfile:
         config.write(configfile)
 
 
 def get_vars():
-    config.read(filename)
+    config.read(config_filename)
     config_dict = {}
     for key in config["DEFAULT"]:
         key = key.upper()

@@ -6,6 +6,14 @@ import auth
 
 admin = Blueprint('admin', __name__)
 
+
+@admin.after_request
+def no_cache(response):
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = 'public, 0'
+    return response
+
 @admin.route('/monitor')
 @auth.is_admin()
 def monitor():
@@ -27,19 +35,23 @@ def generate_url():
     msg = ""
     try:
         if action == "create":
-            token = utils.generate_token(alias)
+            token = utils.generate_token(alias=alias, status="created_by_admin")
             current_app.logger.info(
                 f"[{ alias }][{ token }] has been created.")
-            msg = f"'{alias}' creado"
+            msg = f"'Enlace {alias}' creado"
+
         elif action == "delete":
             database.delete_token_by_alias(alias)
-            msg = f"'Token '{alias}' eliminado"
+            msg = f"{alias}' eliminado"
+
         elif action == "delete_all":
             database.delete_all_tokens()
-            msg = f"Todos los tokens han sido eliminados. Si te equivocaste y querés recuperarlos, usá la opción restaurar desde backup"
+            msg = f"Todos los enlaces han sido eliminados. Si te equivocaste y querés recuperarlos, usá la opción restaurar desde backup"
+        
         elif action == "restore_from_backup":
             database.restore_tokens_from_backup()
-            msg = f"Tokens restaurados"
+            msg = f"Enlaces restaurados"
+        
         else:
             msg = "Acción desconocida"
     except Exception as error:

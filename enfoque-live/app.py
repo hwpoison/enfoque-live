@@ -28,6 +28,7 @@ app.register_blueprint(admin_route)
 # init db
 database.create_table()
 
+# load configuration file
 app.config.update(configuration.get_vars())
 
 # init logging handler and lvl

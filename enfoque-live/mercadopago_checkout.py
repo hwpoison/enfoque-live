@@ -49,7 +49,7 @@ def approve(token):
 
 @mp_checkout.route('/get_preference', methods=['GET'])
 def get_preference():
-    token = utils.generate_candidate_token()  # gen a banned token
+    token = utils.generate_token(status="to_approve")
     target_url = url_for("mp_checkout.approve", token=token, _external=True)
     current_app.logger.info(
         f"get_preference called and target url '{target_url}' generated for an intent from {request.remote_addr} to buy the token {token}")

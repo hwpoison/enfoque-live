@@ -1,4 +1,4 @@
-from flask import Blueprint, Response, render_template, request, current_app, redirect, url_for, current_app, make_response
+from flask import Blueprint, Response, render_template, request, current_app, redirect, url_for, current_app, make_response, send_from_directory
 import configuration
 import database
 import hashlib
@@ -8,19 +8,23 @@ import os
 stream = Blueprint('stream', __name__)
 
 
-@stream.route('/monitoring')
-@stream.route('/monitoring/<chunck_name>')
-@auth.is_admin()
-def monitorig(chunck_name=None):
-    hls_full_path = configuration.get("HLS_DIR")
+def send_chunck(chunck_name=None):
+    hls_path = configuration.get("HLS_DIR")
     if chunck_name is None:
         chunck_name = configuration.get("HLS_KEY")
-    if os.path.exists(hls_full_path):
-        with open(hls_full_path + chunck_name, 'rb') as f:
+    hls_fragment_full_path = hls_path + chunck_name
+    if os.path.exists(hls_fragment_full_path):
+        with open(hls_fragment_full_path, 'rb') as f:
             m3u8_content = f.read()
         return Response(m3u8_content, mimetype='application/vnd.apple.mpegurl')
     else:
         return "Stream content not found", 404
+
+@stream.route('/monitoring')
+@stream.route('/monitoring/<chunck_name>')
+@auth.is_admin()
+def monitorig(chunck_name=None):
+    return send_chunck(chunck_name)
 
 
 @stream.route('/play/<token>')
@@ -71,13 +75,7 @@ def play(token, chunck_name=None):
         print(
             f"Request '{current_identity}' match with footprint from token that is '{token_data['footprint']}'")
         if chunck_name:
-            hls_full_path = configuration.get("HLS_DIR")
-            if os.path.exists(hls_full_path):
-                with open(hls_full_path + chunck_name, 'rb') as f:
-                    m3u8_content = f.read()
-                return Response(m3u8_content, mimetype='application/vnd.apple.mpegurl')
-            else:
-                return "Stream content not found", 404
+            return send_chunck(chunck_name)
         else:  # Serve the playlist
             print(
                 f"Serving playlist to {current_identity} for { token_data['token'] }")

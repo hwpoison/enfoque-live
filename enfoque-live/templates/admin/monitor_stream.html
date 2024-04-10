@@ -1,27 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="flex items-center justify-center min-h-screen">
-    <div class="bg-white rounded-lg shadow-md p-2
-    transition-transform text-center w-full">
-        <span class="p-2 font-bold">Monitoring mode</span>
-        <video id="stream" class="video-js w-full rounded-lg" controls preload="auto"
-                poster="/static/cesped.jpg" data-setup="{}">
-            <source src="/monitoring/{{ stream_name }}" type="application/vnd.apple.mpegurl" />
-            <p class="vjs-no-js">
-                To view this video please enable JavaScript, and consider upgrading to a
-                web browser that
-                <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-            </p>
-        </video>
-    </div>
-</div>
-</div>
+<video id="stream" class="video-js w-full rounded-lg" autoplay controls preload="auto"
+        poster="/static/cesped.jpg" data-setup="{}">
+    <source src="/monitoring/{{ stream_name }}" type="application/vnd.apple.mpegurl" />
+    <p class="vjs-no-js">
+        To view this video please enable JavaScript, and consider upgrading to a
+        web browser that
+        <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+    </p>
+</video>
+<link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
 <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
 <script>
 var player = videojs('stream');
-
 // make a square video
 player.fluid(true)
+player.enableDocumentPictureInPicture()
 </script>
 <style>
     body {
