@@ -1,6 +1,11 @@
 from flask import Flask, Blueprint, Response, request, render_template, \
     redirect, url_for, send_file, session, jsonify, make_response
+
 from flask_cors import CORS
+
+
+from utils.cache import cache 
+
 from flask_jwt_extended import JWTManager
 
 from utils import configuration
@@ -12,11 +17,12 @@ from routers.auth import auth as auth_route
 
 import database
 from utils import log, auth
-
+from utils.compression import compress_response
 
 app = Flask(__name__)
 jwt = JWTManager(app)
 CORS(app)
+
 
 app.register_blueprint(mp_route)
 app.register_blueprint(auth_route)
@@ -38,7 +44,7 @@ app.logger.info("EnfoqueLive v1.0 started.")
 app.config['JWT_TOKEN_LOCATION'] = ['cookies']
 app.config["SESSION_COOKIE_DOMAIN"] = False
 app.config['JWT_COOKIE_CSRF_PROTECT'] = False
-app.config['JWT_COOKIE_SECURE'] = False
+app.config['JWT_COOKIE_SECURE'] = True
 
 # Set ersistent jwt for fronted side for when browser is restarted
 app.config['JWT_SESSION_COOKIE'] = False 
@@ -47,6 +53,8 @@ app.config["WTF_CSRF_CHECK_DEFAULT"] = False
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = 172800
 app.config["JWT_SECRET_KEY"] = app.config["SECRET_KEY"]
 
+# set response compressions
+app.after_request(compress_response)
 
 @app.route('/')
 def index():

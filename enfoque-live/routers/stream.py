@@ -8,7 +8,6 @@ import time
 
 stream = Blueprint('stream', __name__)
 
-
 def send_chunck(chunck_name=None):
     hls_path = configuration.get("HLS_DIR")
     if chunck_name is None:

@@ -5,14 +5,6 @@ import database
 
 admin = Blueprint('admin', __name__)
 
-
-@admin.after_request
-def no_cache(response):
-    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
-    response.headers['Pragma'] = 'no-cache'
-    response.headers['Expires'] = 'public, 0'
-    return response
-
 @admin.route('/monitor')
 @auth.is_admin()
 def monitor():

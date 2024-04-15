@@ -25751,3 +25751,459 @@ TypeError: The view function for 'stream.rutina' did not return a valid response
 [2024-04-14 20:54:22,122] INFO in admin: [2SCcs7Ou7bghLN-qgPZjOw] token has been unholded.
 [2024-04-14 20:54:25,301] INFO in admin: [2SCcs7Ou7bghLN-qgPZjOw] token has been banned.
 [2024-04-14 20:54:28,776] INFO in admin: [UhYLWf7eSfabgz6HcZZ71w] token has been banned.
+[2024-04-15 13:33:31,957] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 13:33:32,745] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 13:34:40,463] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 13:34:41,443] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 13:35:28,866] INFO in buy: Intento de compra por parte de 127.0.0.1.
+[2024-04-15 13:35:30,017] INFO in buy: get_preference called and target url 'http://127.0.0.1/approve/sold/HDij_mDX-rua8gU_gzxMMw' generated for an intent from 127.0.0.1 to buy the token HDij_mDX-rua8gU_gzxMMw
+[2024-04-15 13:35:31,342] INFO in buy: {'additional_info': '', 'auto_return': 'approved', 'back_urls': {'failure': 'https://test-alert.vercel.app/', 'pending': 'https://test-403.vercel.app/', 'success': 'https://test-403.vercel.app/'}, 'binary_mode': False, 'client_id': '615284725080787', 'collector_id': 1757435435, 'coupon_code': None, 'coupon_labels': None, 'date_created': '2024-04-15T12:35:32.411-04:00', 'date_of_expiration': None, 'expiration_date_from': None, 'expiration_date_to': None, 'expires': False, 'external_reference': '', 'id': '1757435435-8b7b78f2-180a-4d12-a093-370df2dc0e1c', 'init_point': 'https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=1757435435-8b7b78f2-180a-4d12-a093-370df2dc0e1c', 'internal_metadata': None, 'items': [{'id': '', 'category_id': '', 'currency_id': 'ARS', 'description': '', 'title': 'Link EnfoqueLive', 'quantity': 1, 'unit_price': 1}], 'marketplace': 'NONE', 'marketplace_fee': 0, 'metadata': {}, 'notification_url': None, 'operation_type': 'regular_payment', 'payer': {'phone': {'area_code': '', 'number': ''}, 'address': {'zip_code': '', 'street_name': '', 'street_number': None}, 'email': '', 'identification': {'number': '', 'type': ''}, 'name': '', 'surname': '', 'date_created': None, 'last_purchase': None}, 'payment_methods': {'default_card_id': None, 'default_payment_method_id': None, 'excluded_payment_methods': [{'id': ''}], 'excluded_payment_types': [{'id': ''}], 'installments': None, 'default_installments': None}, 'processing_modes': None, 'product_id': None, 'redirect_urls': {'failure': '', 'pending': '', 'success': ''}, 'sandbox_init_point': 'https://sandbox.mercadopago.com.ar/checkout/v1/redirect?pref_id=1757435435-8b7b78f2-180a-4d12-a093-370df2dc0e1c', 'site_id': 'MLA', 'shipments': {'default_shipping_method': None, 'receiver_address': {'zip_code': '', 'street_name': '', 'street_number': None, 'floor': '', 'apartment': '', 'city_name': None, 'state_name': None, 'country_name': None}}, 'total_amount': None, 'last_updated': None}
+[2024-04-15 13:36:40,639] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 13:36:41,640] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 13:40:24,225] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 13:40:25,022] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 13:47:20,238] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 13:47:21,119] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 13:52:43,032] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 13:54:00,810] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 13:54:01,702] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 13:54:21,329] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 13:55:00,104] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 13:55:39,121] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 13:55:54,917] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 13:56:24,279] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 13:56:25,445] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 13:56:35,172] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 13:56:43,863] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 13:56:47,977] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 13:57:20,292] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 13:57:30,177] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 13:58:48,487] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 13:58:50,846] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 13:59:08,819] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:05:39,581] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:06:50,638] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:07:48,559] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:08:11,101] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:08:41,601] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:08:42,404] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:22:30,944] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:23:34,012] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:24:16,371] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:24:17,384] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:25:41,256] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:25:47,588] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:26:56,209] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:27:12,925] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:29:44,718] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:29:52,104] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:33:32,421] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:33:33,459] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:33:44,944] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:34:29,247] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:34:30,370] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:35:06,189] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:40:39,743] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:49:42,021] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:49:57,088] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:51:30,918] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:53:15,754] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:53:16,459] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:54:23,196] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:56:46,092] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:58:39,095] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:58:47,893] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 14:59:24,994] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 15:02:55,013] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 15:21:24,726] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 15:21:53,030] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:21:53,756] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:21:59,819] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:22:05,864] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:22:11,897] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:22:17,916] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:22:23,957] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:22:29,976] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:22:32,459] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 15:22:36,007] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:22:36,194] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:22:37,164] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:22:43,270] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:22:46,173] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:22:46,874] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:22:52,941] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:22:58,968] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:23:05,005] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:23:11,028] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:23:17,068] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:23:23,120] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:23:29,155] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:23:35,184] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:23:41,212] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:23:47,249] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:23:53,284] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:23:59,318] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:24:05,342] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:24:11,369] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:24:17,389] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:24:23,410] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:24:29,431] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:24:35,467] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:24:41,491] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:24:47,514] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:24:53,534] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:24:54,860] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:24:55,467] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:25:01,530] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:25:01,870] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:25:02,634] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:25:08,816] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:25:12,208] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:25:13,544] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:25:19,731] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:25:25,754] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:25:31,878] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:25:37,925] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:25:44,412] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:25:50,476] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:25:56,508] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:26:02,560] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:26:08,939] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:26:10,411] INFO in admin: [a][pgw9UgjYYAxHXHUadJPPgg] has been created.
+[2024-04-15 15:26:15,836] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:26:21,868] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:26:27,932] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:26:31,652] INFO in admin: [vvv][2NjI6IcRwPTZerN0V73Nzg] has been created.
+[2024-04-15 15:26:34,254] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:26:40,385] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:26:42,813] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:26:43,326] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:26:48,901] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:26:49,651] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:26:55,784] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:27:01,909] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:27:05,316] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:27:06,253] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:27:07,021] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:27:07,563] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:27:07,965] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:27:08,137] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:27:08,747] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:27:14,010] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:27:14,292] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:27:20,139] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:27:20,204] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:27:26,202] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:27:26,266] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:27:32,359] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:27:32,759] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:27:38,474] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:27:38,506] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:27:44,513] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:27:44,564] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:27:50,566] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:27:50,610] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:27:56,632] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:27:56,735] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:28:02,898] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:28:03,191] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:28:09,076] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:28:09,139] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:28:10,805] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:28:12,338] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:28:18,399] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:28:24,440] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:28:30,492] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:28:36,532] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:28:36,973] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:28:37,896] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:28:38,665] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:28:39,441] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:28:40,194] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:28:40,813] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:28:41,577] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:28:42,586] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:28:42,609] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:28:48,621] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:28:48,664] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:28:54,650] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:28:54,685] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:29:00,677] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:29:00,723] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:29:06,732] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:29:06,771] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:29:12,765] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:29:12,799] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:29:18,798] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:29:18,840] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:29:24,828] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:29:24,897] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:29:30,897] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:29:30,926] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:29:36,938] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:29:36,978] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:29:42,991] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:29:43,042] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:29:49,039] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:29:49,074] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:29:55,073] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:29:55,105] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:30:01,102] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:30:01,148] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:30:07,177] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:30:07,270] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:30:13,250] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:30:13,322] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:30:19,300] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:30:19,331] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:30:25,377] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:30:26,074] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:30:31,837] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:30:31,957] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:30:37,932] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:30:37,974] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:30:41,640] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 15:30:42,024] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:30:44,341] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:30:44,573] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:30:50,549] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:30:50,583] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:30:56,580] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:30:56,645] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:31:02,706] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:31:03,171] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:31:08,968] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:31:09,029] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:31:15,074] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:31:15,309] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:31:21,195] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:31:21,231] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:31:27,234] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:31:27,281] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:31:33,274] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:31:33,342] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:31:39,334] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:31:39,369] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:31:45,446] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:31:45,548] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:31:46,331] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:31:51,541] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:31:51,642] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:31:57,573] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:31:57,633] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:32:03,613] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:32:03,663] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:32:09,669] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:32:09,707] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:32:15,733] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:32:15,934] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:32:21,874] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:32:21,930] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:32:27,920] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:32:27,952] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:32:33,966] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:32:34,200] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:32:40,223] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:32:46,856] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:32:52,930] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:32:58,990] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:33:05,166] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:33:11,359] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:33:17,432] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:33:23,518] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:33:29,561] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:33:35,636] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:33:41,741] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:33:47,797] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:33:53,866] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:33:59,953] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:34:06,016] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:34:12,104] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:34:18,302] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:34:24,403] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:34:30,584] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:34:36,662] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:34:42,741] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:34:48,833] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:34:54,928] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:35:00,984] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:35:07,164] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:35:13,256] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:35:19,327] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:35:25,404] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:35:31,521] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:35:37,736] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:35:43,829] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:35:49,880] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:35:55,974] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:36:02,071] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:36:08,150] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:36:14,221] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:36:20,288] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:36:26,461] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:36:32,566] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:36:38,651] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:36:44,826] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:36:50,960] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:36:57,228] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:37:03,319] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:37:09,410] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:37:15,523] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:37:17,435] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 15:37:21,619] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:37:27,722] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:37:33,816] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:37:39,897] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:37:46,075] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:37:52,229] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:37:58,373] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:38:04,444] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:38:08,763] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 15:38:10,527] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:38:14,729] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 15:38:16,614] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:38:23,693] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:38:29,760] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:38:35,812] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:38:42,007] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:38:48,188] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:38:54,419] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:39:00,522] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:39:06,691] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:39:12,764] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:39:18,861] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:39:25,010] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:39:31,107] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:39:37,191] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:39:43,272] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:39:49,356] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:39:55,460] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:40:01,539] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:40:07,622] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:40:13,710] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:40:19,802] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:40:26,020] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:40:32,100] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:40:38,180] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:40:44,238] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:40:50,321] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:40:56,390] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:41:02,608] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:41:08,775] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:41:14,855] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:41:20,938] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:41:27,008] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:41:33,075] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:41:39,138] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:41:45,213] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:41:51,318] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:41:57,479] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:42:03,587] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:42:09,802] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:42:15,871] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:42:22,072] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:42:28,122] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:42:34,226] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:42:40,398] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:42:46,546] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:42:52,642] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:42:59,755] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:43:05,867] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:43:11,940] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:43:18,118] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:43:24,279] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:43:30,358] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:43:36,443] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:43:42,554] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:43:48,602] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:43:54,683] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:44:00,843] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:44:06,990] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:44:13,262] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:44:19,393] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:44:25,496] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:44:31,576] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:44:37,672] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:44:43,756] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:44:49,916] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:44:56,075] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:45:02,134] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:45:04,139] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 15:45:08,168] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:45:14,227] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:45:20,309] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:45:26,392] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:45:32,566] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:49:25,289] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 15:49:25,982] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 15:49:28,157] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:49:34,239] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:49:40,330] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:49:46,517] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:49:52,588] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:49:58,723] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:50:00,764] INFO in buy: Intento de compra por parte de 127.0.0.1.
+[2024-04-15 15:50:02,758] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:50:05,803] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:50:08,840] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:50:10,925] INFO in buy: Intento de compra por parte de 127.0.0.1.
+[2024-04-15 15:50:11,890] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:50:14,948] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:50:17,991] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:50:21,053] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:50:21,082] INFO in buy: Intento de compra por parte de 127.0.0.1.
+[2024-04-15 15:50:25,093] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:50:28,159] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:50:31,211] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:50:31,237] INFO in buy: Intento de compra por parte de 127.0.0.1.
+[2024-04-15 15:50:34,466] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 15:50:34,523] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:50:38,379] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:50:41,520] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:50:41,558] INFO in buy: Intento de compra por parte de 127.0.0.1.
+[2024-04-15 15:50:45,526] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:50:48,584] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:50:51,665] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:50:51,701] INFO in buy: Intento de compra por parte de 127.0.0.1.
+[2024-04-15 15:50:55,683] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:50:58,732] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:51:01,779] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:51:01,872] INFO in buy: Intento de compra por parte de 127.0.0.1.
+[2024-04-15 15:51:05,825] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:51:08,872] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:51:11,930] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:51:11,963] INFO in buy: Intento de compra por parte de 127.0.0.1.
+[2024-04-15 15:51:15,973] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:51:19,035] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:51:22,160] INFO in buy: Intento de compra por parte de 127.0.0.1.
+[2024-04-15 15:51:23,071] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:51:26,135] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:51:29,183] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:51:33,332] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 15:51:33,426] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:51:33,493] INFO in buy: Intento de compra por parte de 127.0.0.1.
+[2024-04-15 15:51:37,355] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:51:41,382] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:51:42,451] INFO in buy: Intento de compra por parte de 127.0.0.1.
+[2024-04-15 15:51:44,453] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:51:47,515] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:51:51,553] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:51:52,739] INFO in buy: Intento de compra por parte de 127.0.0.1.
+[2024-04-15 15:51:55,586] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:51:58,621] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:52:00,616] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 15:52:01,692] INFO in stream: Incoming connection from '127.0.0.1' with 'None' identity
+[2024-04-15 15:52:02,745] INFO in buy: Intento de compra por parte de 127.0.0.1.
+[2024-04-15 15:52:04,732] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:52:10,837] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:52:16,890] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:52:23,956] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:52:30,018] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:52:36,166] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:52:42,260] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:52:48,312] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:52:51,065] INFO in app: EnfoqueLive v1.0 started.
+[2024-04-15 15:52:54,376] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:53:00,457] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:53:06,527] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity
+[2024-04-15 15:53:12,592] INFO in stream: Incoming connection from '127.0.0.1' with '{'role': 'admin'}' identity

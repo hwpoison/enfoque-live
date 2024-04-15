@@ -5,7 +5,7 @@
 <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
 <div id="all-content" class="animate-fade-in">
   <div class="flex justify-center mb-5  rounded-b-lg">
-    <img class="h-28 md:h-32 xs:h-2/4" src="{{ url_for('static', filename='/banner.png') }}" class="animate-bottom">
+    <img class="h-28 md:h-32 xs:h-2/4" src="{{ url_for('static', filename='/banner.webp') }}" class="animate-bottom">
   </div>
   <div class="flex flex-col min-h-screen">
     <div class="flex flex-col md:flex-row flex-grow gap-4">
@@ -58,8 +58,7 @@
             <!--<span class="text-white text-light text-sm italic">Ultima actualización hoy 12:10</span>-->
           </div>
           <p class="shadow-lg text-white pt-2 font-light mt-8">💬Chat publico</p>
-          <script style="width:100%;height:300px" id="cid0020000372828019246" data-cfasync="false" async
-            src="//st.chatango.com/js/gz/emb.js">{ "handle": "enfoque-live", "arch": "js", "styles": { "a": "57a55e", "b": 100, "c": "000000", "d": "000000", "k": "57a55e", "l": "57a55e", "m": "57a55e", "p": "10", "q": "57a55e", "r": 100, "usricon": 0.81, "cnrs": "0.35" } }</script>
+          <iframe src="https://www3.cbox.ws/box/?boxid=3537064&boxtag=Q7wpGZ" width="100%" height="450" allowtransparency="yes" allow="autoplay" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto"></iframe>  
           {% endif %}
         </div>
       </div>
@@ -79,7 +78,7 @@
     </footer>
   </div>
 </div>
-<div id="loader"><img src="{{ url_for('static', filename='/banner.png') }}"></div>
+<div id="loader"><img src="{{ url_for('static', filename='/banner.webp') }}"></div>
 <script>
  {% if pconfig['YOUTUBE_MODE'] == 'enabled' %}
   setTimeout(() => {

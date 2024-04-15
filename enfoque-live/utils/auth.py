@@ -25,7 +25,6 @@ def is_auth():
         def decorator(*args, **kwargs):
             verify_jwt_in_request(optional=True)
             identity = get_jwt_identity()
-            identity = get_jwt_identity()
             if identity:
                     return fn(*args, **kwargs)
             return redirect("/")

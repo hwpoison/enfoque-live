@@ -14,7 +14,7 @@
 }
 
 body {
-  background-image: url('/static/background_3.jpg');
+  background-image: url('/static/default_dark_background.webp');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
