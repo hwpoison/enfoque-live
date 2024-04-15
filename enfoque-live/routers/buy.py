@@ -1,9 +1,8 @@
 from flask import Blueprint, jsonify, render_template, request, current_app, redirect, url_for
 
-import configuration
+from utils import configuration, tokens
 import database
 import mercadopago
-import utils
 
 mp_checkout = Blueprint('mp_checkout', __name__)
 
@@ -14,7 +13,10 @@ def comprar():
     if database.count_tokens_with_condition("sold") >= int(configuration.get("USERS_LIMIT")):
         current_app.logger.warning(
             f"Limite de usuarios alcanzado! { configuration.get('USERS_LIMIT') }")
-        return render_template("limit_users_reached.html")
+        return render_template(
+            "generic_advertence.html", 
+            title="¡Limite de usuarios alcanzado!",
+            message="Lo sentimos, se superó el limite de usuarios y ya no hay más cupos.")
     current_app.logger.info(
         f"Intento de compra por parte de {request.remote_addr}.")
     return render_template("purchase/buy.html", public_key=configuration.get('MERCADOPAGO_PUBLIC_KEY'))
@@ -49,7 +51,7 @@ def approve(token):
 
 @mp_checkout.route('/get_preference', methods=['GET'])
 def get_preference():
-    token = utils.generate_token(status="to_approve")
+    token = tokens.generate_token(status="to_approve")
     target_url = url_for("mp_checkout.approve", token=token, _external=True)
     current_app.logger.info(
         f"get_preference called and target url '{target_url}' generated for an intent from {request.remote_addr} to buy the token {token}")

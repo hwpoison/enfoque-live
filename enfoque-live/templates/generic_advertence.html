@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<body class="bg-gray-200 flex justify-center items-center h-screen">
+    <div class="text-center">
+        <div class="flex justify-center mb-4">
+            <img src="{{ url_for('static', filename='banner.png') }}" alt="logo_enfoque" class="h-26 w-auto mb-4">
+        </div>
+        <div class="text-6xl text-red-600 mb-8">{{ title }}</div>
+        <div class="text-2xl text-gray-700">{{ message }}</div>
+    </div>
+</body>
+    <style>
+        body {
+            background: linear-gradient(11deg, #f8f2d3, #85e39a); /* Degradado de azul a morado */
+        }
+    </style>
+{% endblock %}
+

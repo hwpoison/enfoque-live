@@ -3,25 +3,23 @@ from flask import Flask, Blueprint, Response, request, render_template, \
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 
-import configuration
+from utils import configuration
 
-from mercadopago_checkout import mp_checkout
-from stream import stream as stream_route
-from admin import admin as admin_route
-import auth
+from routers.buy import mp_checkout as mp_route
+from routers.stream import stream as stream_route
+from routers.admin import admin as admin_route
+from routers.auth import auth as auth_route
 
 import database
-import log
+from utils import log, auth
 
-
-CONFIGURATION_FILENAME = "app_settings.json"
 
 app = Flask(__name__)
 jwt = JWTManager(app)
 CORS(app)
 
-app.register_blueprint(mp_checkout)
-app.register_blueprint(auth.auth)
+app.register_blueprint(mp_route)
+app.register_blueprint(auth_route)
 app.register_blueprint(stream_route)
 app.register_blueprint(admin_route)
 
@@ -53,12 +51,11 @@ app.config["JWT_SECRET_KEY"] = app.config["SECRET_KEY"]
 @app.route('/')
 def index():
     auth.verify_jwt_in_request(optional=True)
-    current = auth.get_jwt_identity()
-    if current == "admin":
-        return redirect(url_for("admin.panel"))
-    else:
-        return redirect("/comprar")
-
+    identity = auth.get_identity()
+    if identity:
+        if identity['role'] == "admin":
+            return redirect("/panel")
+    return redirect("/comprar")
 
 @app.route('/update_config', methods=['POST'])
 def update_config():
@@ -68,7 +65,6 @@ def update_config():
 
     for key in list(configuration.get_vars()):
         configuration.set(key, app.config.get(key))
-
     return '', 200
 
 

@@ -1,8 +1,7 @@
 from flask import Blueprint, jsonify, render_template, request, current_app, redirect, url_for, current_app
-import configuration
+from utils import configuration, auth, tokens
 import database
-import utils
-import auth
+
 
 admin = Blueprint('admin', __name__)
 
@@ -35,7 +34,7 @@ def generate_url():
     msg = ""
     try:
         if action == "create":
-            token = utils.generate_token(alias=alias, status="created_by_admin")
+            token = tokens.generate_token(alias=alias, status="created_by_admin")
             current_app.logger.info(
                 f"[{ alias }][{ token }] has been created.")
             msg = f"'Enlace {alias}' creado"

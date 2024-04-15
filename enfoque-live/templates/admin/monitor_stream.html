@@ -11,19 +11,5 @@
 </video>
 <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
 <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
-<script>
-var player = videojs('stream');
-// make a square video
-player.fluid(true)
-player.enableDocumentPictureInPicture()
-</script>
-<style>
-    body {
-        height:100%;
-        background-image: url('/static/background.jpg');
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-size: cover;
-    }
-</style>
+<script src="{{ url_for('static', filename='/js/stream_player.js') }}"></script>
 {% endblock %}

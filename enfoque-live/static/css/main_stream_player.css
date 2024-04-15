@@ -1,0 +1,150 @@
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 120px;
+  height: 120px;
+  margin: -76px 0 0 -76px;
+  animation: pulse 2s infinite;
+}
+#all-content {
+  display: none;
+  text-align: center;
+}
+
+body {
+  background-image: url('/static/background_3.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+@media (min-width: 768px) {
+  #stream {
+    height: 95%;
+  }
+  #yt-live-frame {
+    height: 600px;
+  }
+  #chat-iframe {
+    height: 600px;
+  }
+}
+
+@media (max-width: 744px) {
+  #stream {
+    height: 200px;
+  }
+  #yt-live-frame {
+    height: 300px;
+  }
+  #chat-iframe {
+    height: 400px;
+  }
+}
+
+.video-container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.video-container iframe,
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.video-container iframe,
+{
+  pointer-events: none;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: -60px;
+  left: 0;
+  width: 100%;
+  height: calc(100% + 120px);
+}
+
+.video-foreground {
+  pointer-events: none;
+}
+
+/* Marquesina */
+.marquee-container {
+    width: 100%;
+    height: 35px; /* Ajusta la altura según sea necesario */
+    overflow: hidden;
+}
+
+.marquee {
+    white-space: nowrap;
+    animation: marquee 8s linear infinite;
+}
+
+@keyframes marquee {
+    0%   { transform: translateX(100%); }
+    100% { transform: translateX(-200%); }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+  }
+
+  70% {
+    transform: scale(1.4);
+    box-shadow: 0 0 0 0px rgba(0, 0, 0, 0);
+  }
+
+  100% {
+    transform: scale(1.4);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+}
+
+
+/* page content animation */
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+.animate-fade-in {
+  -webkit-animation-name: animate-fade-in;
+  -webkit-animation-duration: 1s;
+  animation-name: animate-fade-in;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 } 
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom { 
+  from{ bottom:-100px; opacity:0 } 
+  to{ bottom:0; opacity:1 }
+}
+
+
+@-webkit-keyframes animate-fade-in { 
+  from{ opacity:0 } 
+  to{ opacity:1 }
+}
+
+@keyframes animate-fade-in { 
+  from{ opacity:0 } 
+  to{ opacity:1 }
+}

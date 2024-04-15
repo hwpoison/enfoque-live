@@ -1,99 +1,135 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="flex justify-center h-28 xs:h-2/4">
-  <img src="{{ url_for('static', filename='/banner.png') }}">
-</div>
-<div>
-  <div class="flex flex-col sm:flex-row -mt-2 ">
-    <div class="rounded-lg bg-gray-500  bg-opacity-50 px-1 md:px-4 m-2 w-full sm:w-3/5 pb-2">
-      <p class="shadow-lg py-1 text-white font-bold">Transmisión en vivo</p>
-      {% if pconfig['YOUTUBE_MODE'] == 'enabled' %}
-      <iframe id="yt-live-frame" class="rounded-lg" width=100% height="480"
-        src="https://www.youtube.com/embed/{{ pconfig.YOUTUBE_ID }}?modestbranding=0&autoplay=1&rel=0&showinfo=0&controls=1"
-        title="Enfoque Live Streaming" frameborder="0"
-        allow="accelerometer; autoplay; ; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-      </iframe>
-      {% else %}
-      <video id="stream" class="video-js w-full md:h-full rounded-lg" controls autoplay preload="auto"
-        poster="/static/cesped.jpg" data-setup="{}">
-        <source src="/play/{{ token }}/{{ stream_name }}" type="application/vnd.apple.mpegurl" />
-        <p class="vjs-no-js">
-          To view this video please enable JavaScript, and consider upgrading to a
-          web browser that
-          <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-        </p>
-      </video>
-      {% endif %}
-    </div>
-    <div class="rounded-lg bg-gray-500  bg-opacity-50 px-1 md:px-4 m-2  w-full sm:w-2/5 pb-2">
-      <p class="shadow-lg py-1 text-white font-bold">Chat publico</p>
-      {% if pconfig['YOUTUBE_MODE'] == 'enabled' %}
-      <iframe class="rounded-lg " width="100%" height="480px"
-        src="https://www.youtube.com/live_chat?v={{ pconfig.YOUTUBE_ID }}&amp;embed_domain={{ pconfig.DOMAIN }}"></iframe>
-      {% else %}
-      <script style="width:100%;height:300px" id="cid0020000372828019246" data-cfasync="false" async
-        src="//st.chatango.com/js/gz/emb.js">{ "handle": "enfoque-live", "arch": "js", "styles": { "a": "99cc33", "b": 100, "c": "000000", "d": "000000", "k": "99cc33", "l": "99cc33", "m": "99cc33", "p": "10", "q": "99cc33", "r": 100, "usricon": 0.81, "cnrs": "0.35" } }</script>
-      {% endif %}
-    </div>
+<link href="{{ url_for('static', filename='/css/main_stream_player.css') }}" rel="stylesheet" />
+<link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
+<script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+<div id="all-content" class="animate-fade-in">
+  <div class="flex justify-center mb-5  rounded-b-lg">
+    <img class="h-28 md:h-32 xs:h-2/4" src="{{ url_for('static', filename='/banner.png') }}" class="animate-bottom">
   </div>
-  <footer>
-    <h2 class="bg-gray-600 bg-opacity-50 text-white text-bold text-center">- by Enfoque Zonal 2023 -</h2>
-  </footer>
-  <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
-  <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
-  <style type="text/css">
-    body {
-      background-image: url('/static/background.jpg');
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-size: cover;
-    }
+  <div class="flex flex-col min-h-screen">
+    <div class="flex flex-col md:flex-row flex-grow gap-4">
+      <div class="rounded-sm bg-gray-700 p-2 bg-opacity-70 md:w-3/4">
+        <p class="shadow-lg text-white pb-1 font-light">📹Transmisión en vivo</p>
+        {% if pconfig['YOUTUBE_MODE'] == 'enabled' %}
+        <iframe id="yt-live-frame" width=100% height="90%"
+          src="https://www.youtube.com/embed/{{ pconfig.YOUTUBE_ID }}?modestbranding=0&autoplay=1&rel=0&showinfo=0&controls=1"
+          title="Enfoque Live Streaming" frameborder="0"
+          allow="accelerometer; autoplay; ; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+        </iframe>
+        {% else %}
+        <!-- videoJS player -->
+        <video id="stream" class="video-js w-full md:h-full rounded-lg" controls autoplay preload="auto"
+          data-setup="{}">
+          <source src="/play/{{ token }}/{{ stream_name }}" type="application/vnd.apple.mpegurl" />
+          <p class="vjs-no-js">
+            To view this video please enable JavaScript, and consider upgrading to a
+            web browser that
+            <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+          </p>
+        </video>
+        {% endif %}
+      </div>
+      <div class="md:w-1/4 md:ml-4">
+        <div class="rounded-sm bg-gray-700 p-2 bg-opacity-70 h-full">
+          {% if pconfig['YOUTUBE_MODE'] == 'enabled' %}
+          <iframe width="100%" style="height:100%"
+            src="https://www.youtube.com/live_chat?v={{ pconfig.YOUTUBE_ID }}&amp;embed_domain={{ pconfig.DOMAIN }}">
+          </iframe>
+          {% else %}
+          <!-- Updates view -->
+          <div class="">
+            {% if pconfig['STREAM_TITLE'] %}
+            <p class="shadow-lg text-white font-light">📢 Información </p>
+            <div class="bg-gray-900 bg-opacity-90  p-3 lg:p-4 mb-2 text-center text-3xl text-white">
+              <span id="stream-title">{{ pconfig['STREAM_TITLE'] }}</span>
+              <div class="marquee-container">
+                <p id="stream-subtitle" class="marquee text-white underline decoration-red-500">{{
+                  pconfig['STREAM_SUBTITLE'] }}</p>
+              </div>
+            </div>
+            {% endif %}
+            {% if pconfig['STREAM_DATE_INFO'] %}
+            <div id="stream-date" class="bg-gray-900 bg-opacity-90 mx-8 p-3 lg:p-4 text-center text-xl text-white">
+              {{ pconfig['STREAM_DATE_INFO'] }}
+            </div>
+            {% endif %}
+            <!--<span class="text-white text-light text-sm italic">Ultima actualización hoy 12:10</span>-->
+          </div>
+          <p class="shadow-lg text-white pt-2 font-light mt-8">💬Chat publico</p>
+          <script style="width:100%;height:300px" id="cid0020000372828019246" data-cfasync="false" async
+            src="//st.chatango.com/js/gz/emb.js">{ "handle": "enfoque-live", "arch": "js", "styles": { "a": "57a55e", "b": 100, "c": "000000", "d": "000000", "k": "57a55e", "l": "57a55e", "m": "57a55e", "p": "10", "q": "57a55e", "r": 100, "usricon": 0.81, "cnrs": "0.35" } }</script>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <!-- Footer -->
+    <footer class="rounded-lg bg-gray-700 bg-opacity-70 shadow m-4 mt-10">
+      <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+        <span class="text-sm text-white sm:text-center ">© 2024 <span
+            class="hover:underline">by Enfoque Zonal</span>. Argentina
+        </span>
+        <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-white sm:mt-0">
+          <li><a href="https://enfoquezonal.com.ar/" target="_blank" class="hover:underline me-4 md:me-6">Sitio
+              oficial</a></li>
+          <li><a href="https://wa.link/ldbqq3" target="_blank" class="hover:underline">Whatsapp</a></li>
+        </ul>
+      </div>
+    </footer>
+  </div>
+</div>
+<div id="loader"><img src="{{ url_for('static', filename='/banner.png') }}"></div>
+<script>
+ {% if pconfig['YOUTUBE_MODE'] == 'enabled' %}
+  setTimeout(() => {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("all-content").style.display = "block";
+  }, 2000);
+  {% else %}
+  window.addEventListener("load", function () {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("all-content").style.display = "block";
+  });
+  {% endif %}
+  var player = videojs('stream');
+  player.fluid(true)
 
-    @media (min-width: 768px) {
-      #stream {
-        height: 600px;
-      }
-    }
+  function refreshVideoContent() {
+    player.src({
+      type: 'application/vnd.apple.mpegurl',
+      src: '/play/{{token}}/{{ stream_name }}'
+    });
+    player.play()
+  }
 
-    @media (max-width: 744px) {
-      #stream {
-        height: 300px;
-        /* Establece la altura a 400px para medidas inferiores a 768px */
-      }
-    }
-
-    .video-container {
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .video-container iframe,
-    {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    }
-
-    .video-container iframe,
-    {
-    pointer-events: none;
-    }
-
-    .video-container iframe {
-      position: absolute;
-      top: -60px;
-      left: 0;
-      width: 100%;
-      height: calc(100% + 120px);
-    }
-
-    .video-foreground {
-      pointer-events: none;
-    }
-  </style>
-  {% endblock %}
+  player.on('error', () => {
+    let Interval;
+    document.querySelector(".vjs-modal-dialog-content").innerText = "Parece ser que aún no hay una transmisión en curso, cuando la haya, esta se reproducirá automaticamente"
+    Interval = setInterval(() => {
+      fetch('/status')
+      .then(response => {
+        if (response.ok) {
+          refreshVideoContent()
+          clearInterval(Interval)
+        }
+      })
+      .catch(error => {
+        console.error('Error trying to connect to the server:', error);
+      })
+    }, 10000);
+  })
+  // Update stream status info
+  function getStatus() {
+    fetch('/status')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById("stream-title").innerHTML = data.event_info.stream_title
+        document.getElementById("stream-date").innerHTML = data.event_info.stream_date_info
+        document.getElementById("stream-subtitle").innerHTML = data.event_info.stream_subtitle
+      })
+      .catch(error => console.error('Error al obtener el estado:', error));
+  }
+  setInterval(getStatus, 10000);
+</script>
+{% endblock %}

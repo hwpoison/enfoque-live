@@ -1,5 +1,5 @@
 import sqlite3
-import configuration
+from utils import configuration
 
 DB_FILENAME = configuration.get("tokens_db_name")
 
