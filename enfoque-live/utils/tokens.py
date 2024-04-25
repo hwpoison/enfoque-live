@@ -1,10 +1,15 @@
 import secrets
 import random
-import database
 
-def generate_token(alias=False, status=""):
-    if not alias:
-        alias = str(random.randint(100, 99999))
+def generate_token():
     token = secrets.token_urlsafe(16)
-    database.store_token(token, alias, None, status, False)
     return token
+
+def generate_alias():
+    return str(random.randint(100, 99999))
+
+def generate_error_id():
+    return secrets.token_urlsafe(8)
+
+def generate_image_id():
+    return secrets.token_urlsafe(5)

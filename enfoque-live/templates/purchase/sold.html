@@ -2,20 +2,22 @@
 {% block content %}
 <div id="caja" class="flex items-center justify-center py-5 lg:pt-12 h-auto">
    <div class="main bg-white rounded-lg shadow-md p-10 transition-transform w-full mx-10 lg:w-1/2 text-center">
-      <h3 class="text-2xl font-bold mb-4 text-green-700">Tu link está listo</h3>
-      <p class="text-light text-sm">Este enlace te permitirá a acceder a una transmisión en vivo exclusiva de Enfoque
-         Fútbol. Podés guardarlo y abrirlo despues o acceder ahora mismo.</p>
+      <h3 class="text-2xl font-bold mb-4 text-green-700">¡Tu link ya está listo!</h3>
+      <p class="text-light text-sm">Este enlace te permitirá a acceder a una transmisión en vivo exclusiva de Enfoque Fútbol. Podés guardarlo y abrirlo despues o acceder ahora mismo.</p>
+      <img src="/static/images/banner.webp" alt="Imagen de acceso" class="w-40 h-full pt-2 mx-auto mb-6">
+      🙂👇<h3 class="text-bold text-xl mb-10 bg-gray-100 rounded-md p-2"><a href="{{ url }}">{{ url }}</a></h3>
 
-      <img src="/static/banner.webp" alt="Imagen de acceso" class="w-64 h-full mx-auto mb-6">
-      👇<h3 class="text-bold text-xl mb-10"><a href="{{ url }}">{{ url }}</a></h3>
-
-      <a href="{{ url }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-10">Ingresar
-         ahora</a>
+      <a href="{{ url }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-10">Ingresar ahora mismo</a>
+      <br>
+      <div class="mt-4">
+         <p class="font-bold text-red-600 text-sm">Atención: El enlace no se debe/puede compartir y va a ser accesible solo desde el dispositivo en el que se abrió por primera vez. </p>
+      </div>
    </div>
+
 </div>
 <style>
    body {
-      background-image: url('/static/default_dark_background.webp');
+      background-image: url('/static/images/default_dark_background.webp');
       background-repeat: no-repeat;
       background-attachment: fixed;
       background-size: cover;

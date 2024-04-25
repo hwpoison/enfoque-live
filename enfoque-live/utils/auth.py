@@ -32,6 +32,7 @@ def is_auth():
     return wrapper
 
 def get_identity():
+    verify_jwt_in_request(optional=True)
     return get_jwt_identity()
 
 def unset_identity(resp):

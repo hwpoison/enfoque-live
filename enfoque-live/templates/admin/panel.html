@@ -1,15 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
 <center>
-    <p class="font-bold py-5">📌 Modo de streaming actual</p>
-    {% if pconfig.YOUTUBE_MODE == 'enabled' %}
-    <p class="text-green-600 font-bold">Youtube</p>
+    <!-- mode setup -->
+    <p class="font-bold mb-2">📌 Modo de streaming actual</p>
+    {% if pconfig.youtube_mode == 'enabled' %}
+        <p class="text-green-600 font-bold">Youtube</p>
     {% else %}
-    <p class="text-red-600 font-bold">RTMP / HLS (Defecto)</p>
+        <p class="text-red-600 font-bold">RTMP / HLS (Defecto)</p>
     {% endif %}
-    <hr class="my-4">
     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold p-3 px-4 rounded"
-        onclick="window.open('{{ url_for('admin.monitor')}}', '_blank')">Monitorear RTMP</button>
+        onclick="window.open('{{ url_for('admin.monitor')}}', '_blank')">Monitorear transmisión</button>
+    <hr class="mt-4">
+    <!-- misc configuration -->
     <p class="font-bold py-5">⚙️ Gestión de configuraciónes</p>
     <form id="config-update-form" action="/update_config" method="post" class="w-full max-w-sm">
         <div class="md:flex md:items-center mb-6">
@@ -17,8 +19,8 @@
                 <label class="block" for="youtube_id">Youtube Live ID:</label>
             </div>
             <div class="md:w-2/3">
-                <input type="text" placeholder="ID Youtube" id="youtube_id" name="YOUTUBE_ID"
-                    value="{{ pconfig.YOUTUBE_ID }}" class="outline outline-2 outline-slate-200 rounded-lg p-3">
+                <input type="text" placeholder="ID Youtube" id="youtube_id" name="youtube_id"
+                    value="{{ pconfig.youtube_id }}" class="outline outline-2 outline-slate-200 rounded-lg p-3">
             </div>
         </div>
         <div class="md:flex md:items-center mb-6">
@@ -26,13 +28,13 @@
                 <label for="estado">Youtube mode:</label>
             </div>
             <div class="md:w-2/3">
-                <select id="estado" class="p-2" name="YOUTUBE_MODE">
-                    {% if pconfig.YOUTUBE_MODE == 'enabled' %}
-                    <option value="enabled" selected>Activado</option>
-                    <option value="disabled">Desactivado</option>
+                <select id="estado" class="p-2" name="youtube_mode">
+                    {% if pconfig.youtube_mode == 'enabled' %}
+                        <option value="enabled" selected>Activado</option>
+                        <option value="disabled">Desactivado</option>
                     {% else %}
-                    <option value="enabled">Activado</option>
-                    <option value="disabled" selected>Desactivado</option>
+                        <option value="enabled">Activado</option>
+                        <option value="disabled" selected>Desactivado</option>
                     {% endif %}
                 </select>
             </div>
@@ -43,13 +45,13 @@
                 <label for="estado">Acceso gratis:</label>
             </div>
             <div class="md:w-2/3">
-                <select id="estado" class="p-2" name="FREE_MODE">
-                    {% if pconfig.FREE_MODE == 'enabled' %}
-                    <option value="enabled" selected>Activado</option>
-                    <option value="disabled">Desactivado</option>
+                <select id="estado" class="p-2" name="free_mode">
+                    {% if pconfig.free_mode == 'enabled' %}
+                        <option value="enabled" selected>Activado</option>
+                        <option value="disabled">Desactivado</option>
                     {% else %}
-                    <option value="enabled">Activado</option>
-                    <option value="disabled" selected>Desactivado</option>
+                        <option value="enabled">Activado</option>
+                        <option value="disabled" selected>Desactivado</option>
                     {% endif %}
                 </select>
             </div>
@@ -61,9 +63,7 @@
             </div>
             <div class="md:w-2/3">
                 <label for="limitusers" class="p-2">
-                    <input type="number" id="numero" class="outline outline-2 outline-slate-200 rounded-lg p-3"
-                        name="USERS_LIMIT" value="{{ pconfig.USERS_LIMIT }}">
-                    </select>
+                <input type="number" id="numero" class="outline outline-2 outline-slate-200 rounded-lg p-3" name="users_limit" value="{{ pconfig.users_limit }}">
             </div>
         </div>
         <div class="md:flex md:items-center mb-6">
@@ -72,21 +72,31 @@
             </div>
             <div class="md:w-2/3">
                 <label for="limitusers" class="p-2">
-                    <input type="number" id="numero" class="outline outline-2 outline-slate-200 rounded-lg p-3"
-                        name="LINK_PRICE" value="{{ pconfig.LINK_PRICE }}">
-                    </select>
+                    <input type="number" id="numero" class="outline outline-2 outline-slate-200 rounded-lg p-3" name="link_price" value="{{ pconfig.link_price }}">
             </div>
         </div>
 
+        <div class="md:flex md:items-center mb-6">
+            <div class="md:w-1/3">
+                <label for="estado">Poster:</label>
+            </div>
+            <div class="md:w-2/3">
+                <input placeholder="asda" type="file" accept="image/*" name="player_poster_image">
+            </div>
+        </div>
         <div class="md:flex md:items-center mb-6">
             <div class="md:w-1/3">
                 <label for="estado">Titulo streaming:</label>
             </div>
             <div class="md:w-2/3">
                 <label for="limitusers" class="p-2">
-                    <input type="text" id="numero" class="outline outline-2 outline-slate-200 rounded-lg p-3"
-                        name="STREAM_TITLE" value="{{ pconfig.STREAM_TITLE }}">
-                    </select>
+                    <input type="text" id="numero" list="titulos" class="outline outline-2 outline-slate-200 rounded-lg p-3"
+                        name="stream_title" value="{{ pconfig.stream_title }}">
+                    <datalist id="titulos">
+                      <option value="- Primer tiempo -">Primer tiempo</option>
+                      <option value="- Entretiempo - ">Entretiempo</option>
+                      <option value="- Segunto tiempo -">Segunto tiempo</option>
+                    </datalist>
             </div>
         </div>
 
@@ -96,9 +106,7 @@
             </div>
             <div class="md:w-2/3">
                 <label for="limitusers" class="p-2">
-                    <input type="text" id="numero" class="outline outline-2 outline-slate-200 rounded-lg p-3"
-                        name="STREAM_SUBTITLE" value="{{ pconfig.STREAM_SUBTITLE }}">
-                    </select>
+                    <input type="text" id="numero" class="outline outline-2 outline-slate-200 rounded-lg p-3" name="stream_subtitule" value="{{ pconfig.stream_subtitule }}">
             </div>
         </div>
 
@@ -108,23 +116,22 @@
             </div>
             <div class="md:w-2/3">
                 <label for="limitusers" class="p-2">
-                    <input type="text" id="numero" class="outline outline-2 outline-slate-200 rounded-lg p-3"
-                        name="STREAM_DATE_INFO" value="{{ pconfig.STREAM_DATE_INFO }}">
+                    <input type="text" id="numero" class="outline outline-2 outline-slate-200 rounded-lg p-3" name="stream_date_info" value="{{ pconfig.stream_date_info }}">
                     </select>
             </div>
         </div>
 
         <div class="">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                type="submit">Actualizar configuración</button>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Actualizar configuración</button>
         </div>
     </form>
     <hr class="mt-4">
 
-    <hr>
+    <!-- link managing -->
+    <div id="actions-section"/>
     <p class="font-bold py-5">🔗 Gestion de enlaces</p>
     <div class="">
-        <form id="token_action_form" action="/token_action" method="post">
+        <form id="token_action_form" action="{{ url_for('admin.token_action') }}" method="post">
             <input type="text" placeholder="Nombre (Opcional)" id="alias" name="alias"
                 class="outline outline-2 outline-slate-200 rounded-lg p-3">
             <select id="token_action" class="p-2" name="select_action">
@@ -132,117 +139,113 @@
                 <option value="create">Crear enlace</option>
                 <option value="delete">Eliminar por nombre</option>
                 <option value="delete_all">Eliminar todos</option>
-                <option value="restore_from_backup">Restaurar backup</option>
+                <!-- <option value="restore_from_backup">Restaurar backup</option> -->
             </select>
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold p-3 px-4 rounded"
-                type="submit">Confirmar</button>
+            <button id="conform-action" class="bg-blue-500 hover:bg-blue-700 text-white font-bold p-3 px-4 rounded" type="submit" onclick="return genericConfirm('¿Estás seguro que quieres realizar esta acción?')">Confirmar</button>
         </form>
         {% if action_msg != None %}
-        {% if action_msg.lower().startswith("error") %}
-        <p style="color: red;">{{ action_msg }}</p>
-        {% elif action_msg.lower() %}
-        <p style="color: green;">{{ action_msg }}</p>
+            {% if action_msg.lower().startswith("error") %}
+                <p style="color: red;">{{ action_msg }}</p>
+            {% elif action_msg.lower() %}
+                <p style="color: green;">{{ action_msg }}</p>
+            {% endif %}
         {% endif %}
-        {% endif %}
-
     </div>
-    <div class="px-5 flex content-center ">
+    <div class="flex content-center">
         <hr class="py-5">
-
-        <body class="">
-            <div class="container mb-32">
-                {% if data %}
-                <table
-                    class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5">
-                    <thead class="text-white">
-                        {% for token, info in data.items() %}
-                        <tr
-                            class="bg-blue-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
-                            <th class="p-3 text-left">Nombre</th>
-                            <th class="p-3 text-left">Token</th>
-                            <th class="p-3 text-left">Disponibilidad</th>
-                            <th class="p-3 text-left">Estado</th>
-                            <th class="p-9 md:p-3 text-left" width="110px">Actions</th>
-                        </tr>
-                        {% endfor %}
-                    </thead>
-                    <tbody class="flex-1 sm:flex-none">
-                        {% for token, info in data.items() %}
-                        <tr class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0 text-left">
-                            <td class="border-grey-light border hover:bg-gray-100 p-3">{{ info['name'] }}</td>
-                            <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">
-                                <a href="{{ url_for('index', _external=True) }}play/{{ token }}" target="_blank">
-                                    {{ url_for("index", _external=True) }}play/{{ token }}
-                                </a>
-                            </td>
-                            <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">
-                                {% if info['footprint'] == None %}
+        <div class="container mb-32 mt-8">
+            {% if data %}
+            <table class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg w-screen overflow-hidden sm:shadow-lg">
+                <thead class="text-white">
+                    {% for token, info in data.items() %}
+                    <tr
+                        class="bg-blue-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+                        <th class="p-3 text-left">Nombre</th>
+                        <th class="p-3 text-left">Token</th>
+                        <th class="p-3 text-left">Disponibilidad</th>
+                        <th class="p-3 text-left">Detalles</th>
+                        <th class="p-3 text-left" height="102px" width="120px">Acciones</th>
+                    </tr>
+                    {% endfor %}
+                </thead>
+                <tbody class="flex-1 sm:flex-none">
+                    {% for token, info in data.items() %}
+                    <tr class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0 text-left">
+                        <td id="{{ token }}" class="border-grey-light border hover:bg-gray-100 p-3">{{ info['name'] }}</td>
+                        <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">
+                            <a class="oveflow-scroll" href="{{ url_for('index', _external=True) }}play/{{ token }}" target="_blank">
+                                {{ token }}
+                            </a>
+                        </td>
+                        <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">
+                            {% if info['banned'] %}
+                                <p class="text-green-600 font-bold">Inhabilitado</p>
+                            {% elif info['footprint'] == None %}
                                 <p class="text-green-600 font-bold">Libre</p>
-                                {% else %}
+                            {% else %}
                                 <p class="text-blue-600 font-bold">Tomado</p>
-                                {% endif %}
-                            </td>
-                            <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">
-                                {% if info["status"] == "sold" %}
+                            {% endif %}
+                        </td>
+                        <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">
+                            {% if info["sold"] %}
                                 <p class="text-green-600 font-bold">Vendido</p>
-                                {% else %}
+                            {% else %}
                                 <p class="text-purple-600 font-bold"> {{ info["status"] }}</p>
-                                {% endif %}
-                            </td>
-                            <td class="">
-                                <form action="/delete_token" method="post">
-                                    <input type="hidden" name="token" value="{{ token }}">
+                            {% endif %}
+                        </td>
+                        <td class="md:flex">
+                            <form action="{{ url_for('admin.unhold_token') }}" method="post">
+                                <input type="hidden" name="token" value="{{ token }}">
+                                <button
+                                    class="text-left border-grey-light border p-3 text-white rounded-lg text-center font-bold cursor-pointer bg-blue-400 hover:bg-blue-700 transition duration-400"
+                                    type="submit"
+                                    onclick="return genericConfirm('¿Liberar este enlace?')">Liberar</button>
+                            </form>
+                            <form action="{{ url_for('admin.ban_token') }}" method="post">
+                                <input type="hidden" name="token" value="{{ token }}">
                                     <button
-                                        class="w-full text-left border-grey-light border hover:bg-gray-100 p-3 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer"
+                                        class=" border-grey-light border p-3 text-white rounded-lg text-center font-bold cursor-pointer bg-red-400 hover:bg-red-700 transition duration-400"
                                         type="submit"
-                                        onclick="return genericConfirm('¿Eliminar este token?')">Eliminar</button>
-                                </form>
-
-                                <form action="/unhold_token" method="post">
-                                    <input type="hidden" name="token" value="{{ token }}">
-                                    <button
-                                        class="w-full text-left border-grey-light border hover:bg-gray-100 p-3 text-blue-400 hover:text-blue-600 hover:font-medium cursor-pointer"
-                                        type="submit"
-                                        onclick="return genericConfirm('Liberar este token?')">Liberar</button>
-                                </form>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-                {% else %}
-                <h4 class="text-gray-700 text-center font-bold py-10">🧐 Aún no se han creado enlaces</h4>
-                {% endif %}
-            </div>
-        </body>
+                                        onclick="return genericConfirm('¿Banear este enlace?')">{% if info['banned'] %} Habilitar {% else %} Inhabilitar {% endif %}</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <h4 class="text-gray-700 text-center font-bold py-10">🧐 Aún no se han creado enlaces</h4>
+            {% endif %}
+        </div>
     </div>
+    <div id="end-of-page"/>
 </center>
 <script>
-    document.getElementById('token_action_form').addEventListener('submit', function (event) {
-        var selectValue = document.getElementById('token_action');
-        if (selectValue.value == '' || selectValue.selectedIndex == 0) {
-            event.preventDefault();
-            alert('Por favor, selecciona una acción.');
-            return
-        }
-    });
-    function genericConfirm(msg) { return confirm(msg) }
-    document.getElementById('config-update-form').addEventListener('submit', function (event) {
+document.getElementById('token_action_form').addEventListener('submit', function (event) {
+    var selectValue = document.getElementById('token_action');
+    if (selectValue.value == '' || selectValue.selectedIndex == 0) {
         event.preventDefault();
-        fetch('/update_config', {
-            method: 'POST',
-            body: new FormData(document.getElementById('config-update-form'))
-        }).then(function (response) {
-            if (response.ok) {
-                alert("Configuración actualizada correctamente!")
-                location.reload();
-            } else {
-                console.error('Error en la solicitud:', response.statusText);
-            }
-        }).catch(function (error) {
-            console.error('Error:', error);
-        });
+        alert('Por favor, selecciona una acción.');
+        return
+    }
+});
+function genericConfirm(msg) { return confirm(msg) }
+document.getElementById('config-update-form').addEventListener('submit', function (event) {
+    event.preventDefault();
+    fetch("{{ url_for('admin.update_config') }}", {
+        method: 'POST',
+        body: new FormData(document.getElementById('config-update-form'))
+    }).then(function (response) {
+        if (response.ok) {
+            alert("Configuración actualizada correctamente!")
+            location.reload();
+        } else {
+            console.error('Error en la solicitud:', response.statusText);
+        }
+    }).catch(function (error) {
+        console.error('Error:', error);
     });
+});
 </script>
 <style>
     html,
@@ -268,4 +271,5 @@
         border-bottom: 2px solid rgba(0, 0, 0, .1);
     }
 </style>
+<!-- This was made in 1 day -->
 {% endblock %}

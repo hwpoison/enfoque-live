@@ -13,8 +13,17 @@
   text-align: center;
 }
 
+#viewers-counter {
+  opacity: 0;
+  transition: opacity .4s;
+}
+
+#viewers-counter.show {
+  opacity: 1;
+}
+
 body {
-  background-image: url('/static/default_dark_background.webp');
+  background-image: url('/static/images/default_dark_background.webp');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -42,39 +51,6 @@ body {
   #chat-iframe {
     height: 400px;
   }
-}
-
-.video-container {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  position: relative;
-}
-
-.video-container iframe,
-{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.video-container iframe,
-{
-  pointer-events: none;
-}
-
-.video-container iframe {
-  position: absolute;
-  top: -60px;
-  left: 0;
-  width: 100%;
-  height: calc(100% + 120px);
-}
-
-.video-foreground {
-  pointer-events: none;
 }
 
 /* Marquesina */
