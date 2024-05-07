@@ -1,0 +1,241 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- Logo -->
+<nav class="flex flex-col justify-center">
+    <div class="flex justify-center rounded-b-lg">
+        <img class="animate-bottom h-24 md:h-32 xs:h-2/4" src="{{ url_for('static', filename='/images/banner.webp') }}">
+    </div>
+    <div class="text-center text-white">
+        <span>Actualidad y fútbol en vivo</span>
+    </div>
+</nav>
+<!-- body -->
+<div id="all" class="bg-white m-2 md:m-8 rounded-sm">
+
+    <!-- Live info -->
+    <div class="container mx-auto p-4 pt-6 md:p-6 lg:p-12">
+
+    <h2 class="text-lg md:text-3xl font-bold mb-4 uppercase tracking-wider">
+    <span class="relative">
+        <span class="absolute top-0 left-0 ">
+        <span class="aw-2 h-2 rounded-full shadow-md"></span>
+        </span>
+        <span class="">🔴</span> Ahora mismo
+    </span>
+    </h2>
+
+
+        <hr>
+        <div class="flex flex-wrap -mx-4">
+            <!-- ... other match cards ... -->
+            <div class="w-full md:w-1/2 xl:w-1/3 p-4">
+                <div class="bg-white shadow-2xl rounded p-4 flex hover:scale-105 transition">
+                    <div class="w-3/4">
+                        <h3 class="text-lg font-bold mb-2">Amistoso</h3>
+                        <p class="text-gray-900 font-bold text-3xl">Arias vs Viamonte</p>
+                        <p class="text-gray-600">Hora: 16:23hs</p>
+                        <p class="text-gray-600">Lugar: Chicha Pfiler</p>
+                        <div class="flex items-center mb-4">
+                            <div class="w-4 h-4 mr-2 rounded-full bg-green-500" ></div>
+                            <p class="text-gray-600 font-bold"> EN VIVO </p>
+                        </div>
+                        <button class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">
+                            <a href="/comprar">Entrar</a>
+                        </button>
+                    </div>
+                    <div class="w-1/4 pt-20">
+                        <img src="{{ pconfig.player_poster_image }}" alt="Image" class="w-full h-24 object-cover rounded">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Proximos partidos -->
+    <div class="container mx-auto p-4 pt-6 md:p-6 lg:p-12">
+    <h2 class="text-lg md:text-3xl font-bold mb-4 uppercase tracking-wider">⚽ Próximos partidos</h2>
+    <hr>
+    <div class="flex flex-wrap -mx-4">
+            <div class="w-full md:w-1/2 xl:w-1/3 p-4">
+            <div class="bg-white shadow-md rounded p-4 border-l-4 border-indigo-600">
+                <h3 class="text-lg font-bold mb-2">Clásico</h3>
+                <p class="text-gray-900 font-bold text-3xl">Canalense vs Libertad</p>
+                <p class="text-gray-600">Domingo 25 de mayo</p>
+                <p class="text-gray-600">Hora: 17:00hs</p>
+                <p class="text-gray-600">Lugar: Saturno</p>
+            </div>
+            </div>
+            <div class="w-full md:w-1/2 xl:w-1/3 p-4">
+            <div class="bg-white shadow-md rounded p-4 border-l-4 border-indigo-600">
+                <h3 class="text-lg font-bold mb-2">Amistoso</h3>
+                <p class="text-gray-900 font-bold text-3xl">Arias vs Viamonte</p>
+                <p class="text-gray-600">Día: Lunes 4 de octubre</p>
+                <p class="text-gray-600">Hora: A definir</p>
+                <p class="text-gray-600">Lugar: Chicha Pfiler</p>
+            </div>
+            </div>
+            <div class="w-full md:w-1/2 xl:w-1/3 p-4">
+            <div class="bg-white shadow-md rounded p-4 border-l-4 border-indigo-600">
+                <h3 class="text-lg font-bold mb-2">Super Clásico</h3>
+                <p class="text-gray-900 font-bold text-3xl">Team E vs Team F</p>
+                <p class="text-gray-600">Día: 15 de junio</p>
+                <p class="text-gray-600">Hora: 12:00hs</p>
+            </div>
+            </div>
+
+    </div>
+    </div>
+    <!-- Resultados anteriores -->
+    <div class="container mx-auto p-4 pt-6 md:p-6 lg:p-12">
+        <h2 class="text-lg md:text-3xl font-bold mb-4 uppercase tracking-wider">🏆 Resultados anteriores</h2>
+        <hr>
+        <div class="overflow-y-auto h-96 border-l-4 border-gray-600">
+            <table class="table-auto w-full">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2 text-left">Fecha</th>
+                        <th class="px-4 py-2 text-left">Equipo 1</th>
+                        <th class="px-4 py-2 text-left">Equipo 2</th>
+                        <th class="px-4 py-2 text-left">Resultado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="px-4 py-2">25/05/2022</td>
+                        <td class="px-4 py-2">Canalense</td>
+                        <td class="px-4 py-2">Libertad</td>
+                        <td class="px-4 py-2">2-1</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">18/05/2022</td>
+                        <td class="px-4 py-2">Arias</td>
+                        <td class="px-4 py-2">Viamonte</td>
+                        <td class="px-4 py-2">1-1</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">11/05/2022</td>
+                        <td class="px-4 py-2">Team E</td>
+                        <td class="px-4 py-2">Team F</td>
+                        <td class="px-4 py-2">3-2</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">11/05/2022</td>
+                        <td class="px-4 py-2">Team E</td>
+                        <td class="px-4 py-2">Team F</td>
+                        <td class="px-4 py-2">3-2</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">11/05/2022</td>
+                        <td class="px-4 py-2">Team E</td>
+                        <td class="px-4 py-2">Team F</td>
+                        <td class="px-4 py-2">3-2</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">11/05/2022</td>
+                        <td class="px-4 py-2">Team E</td>
+                        <td class="px-4 py-2">Team F</td>
+                        <td class="px-4 py-2">3-2</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">11/05/2022</td>
+                        <td class="px-4 py-2">Team E</td>
+                        <td class="px-4 py-2">Team F</td>
+                        <td class="px-4 py-2">3-2</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">11/05/2022</td>
+                        <td class="px-4 py-2">Team E</td>
+                        <td class="px-4 py-2">Team F</td>
+                        <td class="px-4 py-2">3-2</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">11/05/2022</td>
+                        <td class="px-4 py-2">Team E</td>
+                        <td class="px-4 py-2">Team F</td>
+                        <td class="px-4 py-2">3-2</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">11/05/2022</td>
+                        <td class="px-4 py-2">Team E</td>
+                        <td class="px-4 py-2">Team F</td>
+                        <td class="px-4 py-2">3-2</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">11/05/2022</td>
+                        <td class="px-4 py-2">Team E</td>
+                        <td class="px-4 py-2">Team F</td>
+                        <td class="px-4 py-2">3-2</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">11/05/2022</td>
+                        <td class="px-4 py-2">Team E</td>
+                        <td class="px-4 py-2">Team F</td>
+                        <td class="px-4 py-2">3-2</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">11/05/2022</td>
+                        <td class="px-4 py-2">Team E</td>
+                        <td class="px-4 py-2">Team F</td>
+                        <td class="px-4 py-2">3-2</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">11/05/2022</td>
+                        <td class="px-4 py-2">Team E</td>
+                        <td class="px-4 py-2">Team F</td>
+                        <td class="px-4 py-2">3-2</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">11/05/2022</td>
+                        <td class="px-4 py-2">Team E</td>
+                        <td class="px-4 py-2">Team F</td>
+                        <td class="px-4 py-2">3-2</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">11/05/2022</td>
+                        <td class="px-4 py-2">Team E</td>
+                        <td class="px-4 py-2">Team F</td>
+                        <td class="px-4 py-2">3-2</td>
+                    </tr>
+                    <!-- Add more rows here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="container rounded-lg h-20 bg-white mx-auto my-6 md:p-6 lg:p-12">
+        <p class="text-gray-600 text-center">© 2024 EnfoqueFútbol. Todos los derechos reservados.</p>
+    </footer>
+
+</div>
+<style>
+
+body {
+  background-image: url('/static/images/default_dark_background.webp');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.9);
+    box-shadow: 0 0 0 rgba(164, 61, 61, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(164, 61, 61, 0);
+  }
+  100% {
+    transform: scale(0.9);
+    box-shadow: 0 0 0 rgba(164, 61, 61, 0.7);
+  }
+}
+
+</style>
+{% endblock %}

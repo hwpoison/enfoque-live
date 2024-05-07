@@ -3,10 +3,12 @@
 <center>
     <!-- mode setup -->
     <p class="font-bold mb-2">📌 Modo de streaming actual</p>
-    {% if pconfig.youtube_mode == 'enabled' %}
+    {% if pconfig.stream_mode == 'youtube_live' %}
         <p class="text-green-600 font-bold">Youtube</p>
-    {% else %}
+    {% elif pconfig.stream_mode == 'rtmp_local' %}
         <p class="text-red-600 font-bold">RTMP / HLS (Defecto)</p>
+    {% elif pconfig.stream_mode == 'rtmp_cdn' %}
+        <p class="text-purple-600 font-bold">RTMP CDN</p>
     {% endif %}
     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold p-3 px-4 rounded"
         onclick="window.open('{{ url_for('admin.monitor')}}', '_blank')">Monitorear transmisión</button>
@@ -25,17 +27,22 @@
         </div>
         <div class="md:flex md:items-center mb-6">
             <div class="md:w-1/3">
-                <label for="estado">Youtube mode:</label>
+                <label class="block" for="youtube_id">CDN URL:</label>
             </div>
             <div class="md:w-2/3">
-                <select id="estado" class="p-2" name="youtube_mode">
-                    {% if pconfig.youtube_mode == 'enabled' %}
-                        <option value="enabled" selected>Activado</option>
-                        <option value="disabled">Desactivado</option>
-                    {% else %}
-                        <option value="enabled">Activado</option>
-                        <option value="disabled" selected>Desactivado</option>
-                    {% endif %}
+                <input type="text" placeholder="ID Youtube" id="rtmp_cdn_url" name="rtmp_cdn_url"
+                    value="{{ pconfig.rtmp_cdn_url }}" class="outline outline-2 outline-slate-200 rounded-lg p-3">
+            </div>
+        </div>
+        <div class="md:flex md:items-center mb-6">
+            <div class="md:w-1/3">
+                <label for="estado">Streaming mode:</label>
+            </div>
+            <div class="md:w-2/3">
+                <select id="estado" class="p-2" name="stream_mode">
+                        <option value="youtube_live"  {% if pconfig.stream_mode == 'youtube_live' %} selected {% endif %}>Youtube Live</option>
+                        <option value="rtmp_local" {% if pconfig.stream_mode == 'rtmp_local' %} selected {% endif %}>RTMP Local</option>
+                        <option value="rtmp_cdn" {% if pconfig.stream_mode == 'rtmp_cdn' %} selected {% endif %}>RTMP CDN</option>
                 </select>
             </div>
         </div>
@@ -127,7 +134,7 @@
     </form>
     <hr class="mt-4">
 
-    <!-- link managing -->
+    <!-- link manage -->
     <div id="actions-section"/>
     <p class="font-bold py-5">🔗 Gestion de enlaces</p>
     <div class="">
@@ -206,7 +213,8 @@
                                     <button
                                         class=" border-grey-light border p-3 text-white rounded-lg text-center font-bold cursor-pointer bg-red-400 hover:bg-red-700 transition duration-400"
                                         type="submit"
-                                        onclick="return genericConfirm('¿Banear este enlace?')">{% if info['banned'] %} Habilitar {% else %} Inhabilitar {% endif %}</button>
+                                        onclick="return genericConfirm('¿Banear este enlace?')">{% if info['banned'] %} Habilitar {% else %} Inhabilitar {% endif %}
+                                    </button>
                             </form>
                         </td>
                     </tr>

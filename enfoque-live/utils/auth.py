@@ -6,34 +6,30 @@ from flask_jwt_extended import jwt_required, jwt_manager
 
 from functools import wraps
 
-def is_admin():
-    def wrapper(fn):
+def is_auth(*allowed_roles):
+    """
+    Authentication decorator to check if request has allowed role.
+    """
+    def decorator(fn):
         @wraps(fn)
-        def decorator(*args, **kwargs):
-            verify_jwt_in_request(optional=True)
-            identity = get_jwt_identity()
-            if identity:
-                if identity['role'] == "admin":
+        def wrapper(*args, **kwargs):
+            identity = get_identity()
+            if identity and (current_role:=identity.get('role')):
+                if current_role in allowed_roles:
                     return fn(*args, **kwargs)
             return redirect("/")
-        return decorator
-    return wrapper
-
-def is_auth():
-    def wrapper(fn):
-        @wraps(fn)
-        def decorator(*args, **kwargs):
-            verify_jwt_in_request(optional=True)
-            identity = get_jwt_identity()
-            if identity:
-                    return fn(*args, **kwargs)
-            return redirect("/")
-        return decorator
-    return wrapper
+        return wrapper
+    return decorator
 
 def get_identity():
+    """
+    Get current JWT identity
+    """
     verify_jwt_in_request(optional=True)
     return get_jwt_identity()
 
 def unset_identity(resp):
+    """
+    Unset current JWT token from client
+    """
     unset_jwt_cookies(resp)

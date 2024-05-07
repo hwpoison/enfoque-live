@@ -1,25 +1,27 @@
 {
     "DEFAULT": {
+        "stream_mode": "rtmp_local",
         "secret_key": "test_pp",
         "domain": "127.0.0.1",
+        "redis_url": "redis://127.1.0.1:6379",
         "free_mode": "enabled",
         "hls_dir": "../rtmp-server/temp/hls_temp/",
         "hls_key": "stream.m3u8",
         "in_production": false,
-        "ip_footprint": true,
         "mercadopago_private_key": "TEST-615284725080787-040606-eceba0d67265fc6f3a7feb1490ff380b-1757435435",
         "mercadopago_public_key": "TEST-27ad9253-5f55-4628-a4dc-11848acc1853",
         "users_limit": "11",
         "youtube_id": "jfKfPfyJRdk",
-        "youtube_mode": "disabled",
         "link_price": "2",
         "stream_title": "Titulo del streamingo",
         "stream_subtitle": "Enseguida comenzamos.",
         "stream_date_info": "00:01hs",
         "admin_user": "admin",
         "admin_password": "admin",
-        "stream_subtitule": "Subtitulo",
-        "player_poster_image": "/static/uploads/images/poster_M63JIc4.jpg",
-        "chat_embeded_url":"https://www3.cbox.ws/box/?boxid="
+        "stream_subtitule": "ssso",
+        "player_poster_image": "/static/uploads/images/poster_y0Ls2Ak.jpg",
+        "chat_embeded_url": "https://www3.cbox.ws/box/?boxid=",
+        "rtmp_cdn_url": "https://enfoquelivep.b-cdn.net",
+        "youtube_mode": "enabled"
     }
 }
