@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% block content %}
+<body>
+    <div class="max-w-md mx-auto p-4 pt-6 md:p-6 lg:p-12">
+        <h2 class="text-2xl font-bold mb-4 text-center">⚙️ Configuraciones</h2>
+        <form id="config-update-form" action="/update_config" method="post">
+            <div class="grid grid-cols-1 gap-4 mb-4">
+                <div>
+                    <label for="youtube_id" class="block mb-2">Youtube Live ID:</label>
+                    <input type="text" id="youtube_id" name="stream.youtube_video_id" value="{{ pconfig.stream.youtube_video_id }}" class="w-full rounded  p-2 text-sm text-gray-700">
+                </div>
+                <div>
+                    <label for="rtmp_cdn_url" class="block mb-2">CDN URL:</label>
+                    <input type="text" id="rtmp_cdn_url" name="cdn.rtmp_cdn_url" value="{{ pconfig.cdn.url }}" class="w-full rounded  p-2 text-sm text-gray-700">
+                </div>
+                <div>
+                    <label for="estado" class="block mb-2">Streaming mode:</label>
+                    <select id="estado" class="w-full p-2 rounded  text-sm text-gray-700" name="stream.mode">
+                        <option value="youtube_live" {% if pconfig.default.stream_mode == 'youtube_live' %} selected {% endif %}>Youtube Live</option>
+                        <option value="vimeo_live" {% if pconfig.default.stream_mode == 'vimeo_live' %} selected {% endif %}>Vimeo Live</option>
+                        <option value="rtmp_local" {% if pconfig.default.stream_mode == 'rtmp_local' %} selected {% endif %}>RTMP Local</option>
+                        <option value="rtmp_cdn" {% if pconfig.default.stream_mode == 'rtmp_cdn' %} selected {% endif %}>RTMP CDN</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="free_mode" class="block mb-2">Acceso gratis:</label>
+                    <select id="free_mode" class="w-full rounded p-2 text-sm text-gray-700" name="purchase.free_mode">
+                        {% if pconfig.purchase.free_mode == 'enabled' %}
+                            <option value="enabled" selected>Activado</option>
+                            <option value="disabled">Desactivado</option>
+                        {% else %}
+                            <option value="enabled">Activado</option>
+                            <option value="disabled" selected>Desactivado</option>
+                        {% endif %}
+                    </select>
+                </div>
+                <div>
+                    <label for="users_limit" class="block mb-2">Cupo máximo links:</label>
+                    <input type="number" id="users_limit" name="default.users_limit" value="{{ pconfig.purchase.links_limit }}" class="w-full rounded  p-2 text-sm text-gray-700">
+                </div>
+                <div>
+                    <label for="link_price" class="block mb-2">Precio del link:</label>
+                    <input type="number" id="link_price" name="purchase.link_price" value="{{ pconfig.purchase.link_price }}" class="w-full rounded  p-2 text-sm text-gray-700">
+                </div>
+                <div>
+                    <label for="player_poster_image" class="block mb-2">Poster:</label>
+                    <input type="file" id="player_poster_image" name="player_poster_image" accept="image/*" class="w-full rounded p-2 text-sm text-gray-700">
+                </div>
+                <div>
+                    <label for="stream_title" class="block mb-2">Titulo streaming:</label>
+                    <input type="text" id="stream_title" list="titulos" name="stream.title" placeholder="Quienes están jugando" value="{{ pconfig.stream.title }}" class="w-full rounded  p-2 text-sm text-gray-700">
+                    <datalist id="titulos">
+                        <option value="- Primer tiempo -">Primer tiempo</option>
+                        <option value="- Entretiempo - ">Entretiempo</option>
+                        <option value="- Segunto tiempo -">Segunto tiempo</option>
+                    </datalist>
+                </div>
+                <div>
+                    <label for="stream_subtitule" class="block mb-2">Marquesina:</label>
+                    <input type="text" id="stream_subtitule" name="stream.subtitule" value="{{ pconfig.stream.subtitle }}" class="w-full rounded p-2 text-sm text-gray-700">
+                </div>
+                <div>
+                    <label for="stream_date_info" class="block mb-2">Horario streaming / Otra info:</label>
+                    <input type="text" id="stream_date_info" name="stream.date_info" placeholder="Opcional" value="{{ pconfig.stream.date }}" class="w-full rounded p-2 text-sm text-gray-700">
+                </div>
+            </div>
+            <button id="submit-button" type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-sm">Actualizar configuración</button>
+            <div id="error-message" class="hidden text-red-500 text-sm mt-2">
+                Error al actualizar la configuración. Por favor, inténtelo de nuevo.
+            </div>
+            <div id="ok-message" class="hidden text-green-500 text-sm mt-2">
+                Configuración actualizada correctamente.
+            </div>
+        </form>
+    </div>
+</body>
+<script>
+document.getElementById('config-update-form').addEventListener('submit', function (event) {
+    event.preventDefault();
+    const errorMessage = document.getElementById('error-message');
+    const okMessage = document.getElementById('ok-message');
+    const submitButton = document.getElementById('submit-button');
+    submitButton.disabled = true;
+    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Actualizando...';
+    
+    fetch("{{ url_for('admin.update_config') }}", {
+        method: 'POST',
+        body: new FormData(document.getElementById('config-update-form'))
+    }).then(function (response) {
+        if (response.ok) {
+            okMessage.classList.remove('hidden');
+        } else {
+            errorMessage.classList.remove('hidden');
+            console.error('Error en la solicitud:', response.statusText);
+        }
+    }).catch(function (error) {
+        errorMessage.classList.remove('hidden');
+        console.error('Error:', error);
+    }).finally(function () {
+        submitButton.disabled = false;
+        submitButton.innerHTML = 'Actualizar configuración';
+    });
+});
+</script>
+<style>
+    html,
+    body {
+        height: 100%;
+    }
+
+    @media (min-width: 640px) {
+        table {
+            display: inline-table !important;
+        }
+
+        thead tr:not(:first-child) {
+            display: none;
+        }
+    }
+
+    td:not(:last-child) {
+        border-bottom: 0;
+    }
+
+    th:not(:last-child) {
+        border-bottom: 2px solid rgba(0, 0, 0, .1);
+    }
+</style>
+<!-- This was made in 1 day -->
+{% endblock %}

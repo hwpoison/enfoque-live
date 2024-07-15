@@ -1,0 +1,35 @@
+{
+    "DEFAULT": {
+        "secret_key": "test_pp",
+        "domain": "127.0.0.1",
+        "in_production": false,
+    },
+    "PURCHASE":{
+        "mercadopago_private_key": "TEST-615284725080787-040606-eceba0d67265fc6f3a7feb1490ff380b-1757435435",
+        "mercadopago_public_key": "TEST-27ad9253-5f55-4628-a4dc-11848acc1853",
+        "link_price": "2000",
+        "free_mode": "disabled",
+        "link_limit": 10
+    },
+    "STREAM":{
+        "mode": "rtmp_local",
+        "title": "Canalense vs Libertad",
+        "subtitle": "- PRIMER TIEMPO -",
+        "marquee": "Marquee content",
+        "date": "13.30hs - Reserva <br> 15.30hs - Primera",
+        "player_poster_image": "/static/uploads/images/poster_urvZWjU.jpg",
+        "chat_embeded_url": "https://www3.cbox.ws/box/?boxid=",
+        "youtube_video_id": "jfKfPfyJRdk",
+        "redis_serve_url": "redis://127.1.0.1:6379",
+        "hls_dir": "../rtmp-server/temp/hls_temp/",
+        "hls_playlist": "stream.m3u8",
+    },
+    "CREDENTIALS": {
+        "admin_user": "admin",
+        "admin_password": "admin", 
+    },
+    "CDN":{
+        "rtmp_cdn_url": "https://enfoqfutbol.b-cdn.neto",
+        "cdn_origin_secret_token": "zEqjaGs0wPFU2O86IGC6suzhaUqetyIfObqDwjha8PadYdzabZI13qG6LmdiqIIP",
+    }
+}

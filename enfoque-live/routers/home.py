@@ -7,4 +7,4 @@ home = Blueprint('home', __name__)
 @home.route('/home')
 def land():
     return render_template("home/home.html", 
-                           pconfig=configuration.get_vars()['DEFAULT'])
+                           pconfig=configuration.get_vars())

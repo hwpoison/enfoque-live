@@ -1,0 +1,391 @@
+{% extends "base.html" %}
+{% block content %}
+<link href="{{ url_for('static', filename='/css/link_manager.css') }}" rel="stylesheet" />
+</head>
+<body>
+    <div id="actions-section">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-4 text-center py-6">🔗 Gestión de enlaces</h2>
+            <div class="flex justify-center">
+                <form id="token_action_form" method="post" class="flex flex-wrap justify-center md:flex-nowrap max-w-lg" onsubmit="setFormAction(event)">
+                    <input type="text" placeholder="Nombre (Opcional)" id="alias" name="alias" class="outline outline-2 rounded outline-slate-200 p-3 mb-2 md:mr-2 w-full md:w-auto" style="height: 3rem;">
+                    <select id="token_action" name="select_action" class="rounded p-3 mb-2 md:mr-2 w-full md:w-auto" style="height: 3rem;">
+                        <option value="create" selected>Crear enlace</option>
+                        <option value="search">Filtrar</option>
+                        <option value="delete">Eliminar por nombre</option>
+                        <option value="delete_all">Eliminar todos</option>
+                    </select>
+                    <button id="confirm-action" class="bg-blue-500 hover:bg-blue-700 p-3 text-white font-bold rounded-sm w-full md:w-auto" type="submit" style="height: 3rem;">Confirmar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% if action_msg != None %}
+        <p class="text-center {{ 'text-red-500' if action_msg.lower().startswith('error') else 'text-green-500' }}">{{ action_msg }}</p>
+    {% endif %}
+    <div class="flex content-center">
+        <hr class="py-5">
+        <div class="container mb-32 mt-8">
+            <table class="w-full sm:bg-white w-screen overflow-hidden sm:shadow-lg">
+                <thead>
+                    <div id="pagination-controls" class="flex justify-center mt-4"></div>
+                    <tr>
+                        <th class="hidden sm:table-cell p-3 text-left bg-blue-500 text-white">Nombre</th>
+                        <th class="hidden sm:table-cell p-3 text-left bg-blue-500 text-white">Link</th>
+                        <th class="hidden sm:table-cell p-3 text-left bg-blue-500 text-white">Disponibilidad</th>
+                        <th class="hidden sm:table-cell p-3 text-left bg-blue-500 text-white">Detalles</th>
+                        <th class="hidden sm:table-cell p-3 text-left bg-blue-500 text-white">Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="token-table-body" class="flex-1 sm:flex-none"> 
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+    <div id="token-table-spinner" class="fixed top-1/2 left-1/2 translate-x-1/2 translate-y-1/2" style="display:none">
+        <svg aria-hidden="true" class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+        </svg>
+    </div>
+
+    <p id="no-links-msg" style="display:none" class='text-center font-bold text-gray-500'>Aún no hay links</p>
+    
+
+    <div class="popup-container" id="popup" onclick="closeModal(event)" style="display:none">
+       <div class="fixed w-full sm:w-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 bg-white p-5 border border-gray-300 rounded-md shadow-md" onclick="event.stopPropagation()">
+            <button id="close-btn" class="absolute top-0 right-0 p-2 font-light text-3xl" onclick="closeModal(event)">
+                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm7.707-3.707a1 1 0 0 0-1.414 1.414L10.586 12l-2.293 2.293a1 1 0 1 0 1.414 1.414L12 13.414l2.293 2.293a1 1 0 0 0 1.414-1.414L13.414 12l2.293-2.293a1 1 0 0 0-1.414-1.414L12 10.586 9.707 8.293Z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <h2 id="popup-title" class="text-center text-3xl font-light"></h2>
+            <div id="modal-actions-btns" class="flex flex-col items-center p-3">
+                <span class="font-semibold text-gray-500 mb-2">Enlace</span>
+                <div class="flex flex-col md:flex-row items-center">
+                    <input type="text" id="popup-link-input" class="outline outline-1 outline-offset-2 outline-gray-200 p-3 text-center w-full h-9" readonly>
+                    <button id="popup-copy-link-btn" class="ml-2 rounded-sm bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 h-9 mt-2 sm:mt-0" onclick="copyLink(event)">Copiar</button>
+                    <!--<button id="popup-open-link-btn" class="ml-2 rounded-sm bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 h-10" onclick="openLink(event)">Abrir</button>-->
+                </div>
+                <span class="font-semibold text-gray-500 my-1">Acciones</span>
+                <div id="popup-token-action" class="flex flex-col md:flex-row">
+                    <button id="popup-unhold-button" class="m-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" type="submit"></button>
+                    <button id="popup-ban-button" class="m-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" type="submit"></button>
+                    <button id="popup-del-button" class="m-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" type="submit">Eliminar</button>
+                </div>
+                <span id="popup-msg" class="text-center mt-1"></span>
+
+                <div id="popup-token-action-spinner" style="display:none">
+                    <svg aria-hidden="true" class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                    </svg>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div id="end-of-page"/>
+</body>
+<script>
+var currentPage = 1
+var allTokens = {}
+var totalPages = undefined
+
+async function searchToken(query) {
+    if(query === ""){
+        await fetchTokens(1)
+        return false
+    }
+    try {
+        const response = await fetch(`/tokens/search/${query}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Error en la solicitud');
+        }
+        const result = await response.json();
+        allTokens = result.tokens
+        totalPages = result.total_pages
+        renderTokensTable()
+        return true
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Hubo un error al realizar la búsqueda');
+    }
+}
+
+async function setFormAction(event) {
+    event.preventDefault();
+    const form = document.getElementById('token_action_form');
+    const formData = new FormData(form);
+    const action = formData.get('select_action');
+    let endpoint = '';
+    
+    if (action === 'create') {
+        endpoint = '{{ url_for("tokens.create_token") }}';
+    } else if (action == 'search') {
+        await searchToken(formData.get("alias"))
+        return
+    } else if (action === 'delete') {
+        endpoint = '{{ url_for("tokens.delete_token") }}';
+    } else if (action === 'delete_all') {
+        endpoint = '{{ url_for("tokens.delete_all_tokens") }}';
+    }
+    try {
+        const response = await fetch(endpoint, {
+            method: 'POST',
+            body: formData
+        });
+        
+        if (!response.ok) {
+            throw new Error('Error en la solicitud');
+        }
+        const result = await response.json();
+        fetchTokens(currentPage);
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Hubo un error al realizar la acción');
+    }
+}
+
+function genericConfirm(message) {
+    return confirm(message);
+}
+
+function copyLink(event) {
+    const linkInput = document.getElementById("popup-link-input");
+    linkInput.select();
+    document.execCommand("copy");
+    event.target.textContent = "Copiado!"
+}
+
+function openLink(event) {
+    const linkInput = document.getElementById("popup-link-input");
+    linkInput.select();
+    document.execCommand("open");
+    window.open(linkInput.value, '_blank');
+}
+
+function openActions(token_id){
+   const token_data = allTokens[token_id]
+   const popupContainer = document.getElementById(`popup`);
+   document.getElementById("popup-title").textContent = `'${token_data.name}'`;
+   document.getElementById("popup-link-input").value = "{{ url_for('index', _external=True) }}play/" + token_data.token
+   popupContainer.style.display = "block";
+   document.getElementById("popup-unhold-button").textContent = "Liberar"
+
+   unHoldBtn = document.getElementById("popup-unhold-button")
+   unHoldBtn.onclick = ()=>{unholdToken(token_id)}
+
+   banBtn = document.getElementById("popup-ban-button")
+   banBtn.textContent = token_data.banned?"Habilitar":"Inhabilitar"
+   banBtn.onclick = ()=>{banToken(token_id)}
+
+   delBtn = document.getElementById("popup-del-button")
+   delBtn.onclick = ()=>{deleteToken(token_id)}
+}
+
+function isObjectEmpty(obj) {
+    return Object.keys(obj).length === 0;
+}
+
+async function retrieveAllTokens(page){
+    try {
+        const response = await fetch("/tokens/all/page/" + page)
+        const data = await response.json()
+        allTokens = data.tokens
+        totalPages = data.total_pages
+        currentPage = page
+    } catch(error){
+        tableBody.innerHTML = "<p class='text-center font-bold text-red-600'>Error al obtener los tokens!</p>"
+        console.log(error)
+    }
+}
+
+async function renderTokensTable(){
+    const tableBody = document.getElementById('token-table-body');
+    const statusElement = document.getElementById('token-table-spinner');
+    statusElement.style.display = 'block'; // show the status element
+    try {
+        tableBody.innerHTML = ""
+        if(isObjectEmpty(allTokens) == true){
+            const el = document.getElementById("no-links-msg")
+            el.style.display = "block";
+        }
+
+        for(token_id in allTokens){
+            info = allTokens[token_id]
+            const row = document.createElement('tr');
+            row.id = token_id
+            row.className = 'flex flex-col hover:bg-gray-100 cursor-default flex-no wrap sm:table-row mb-5 sm:mb-0 text-left token-table-item';
+            row.innerHTML = `
+                    <td id="${token_id}" class="border-grey-light border md:p-3 truncate">
+                        <span class="sm:hidden font-bold text-white rounded-sm bg-blue-500 p-4 inline-block" style="width:90px">Nombre</span>
+                        ${info.name}
+                    </td>
+
+                    <td class="border-grey-light border md:p-3">
+                        <a class="oveflow-scroll" target="_blank">
+                            <span class="sm:hidden font-bold text-white rounded-sm bg-blue-500 p-4 inline-block" style="width:90px">Link</span>
+                            <span>${info.token}</span>
+                        </a>
+                    </td>
+
+                    <td class="border-grey-light border  md:p-3 truncate">
+                        <span class="sm:hidden font-bold text-white rounded-sm bg-blue-500 p-4 inline-block" style="width:90px">Disp.</span> 
+                        <span>${info.banned ? '<span class="text-green-600 font-bold">Inhabilitado</span>' : info.footprint === null ? '<span class="text-green-600 font-bold">Libre</span>' : '<span class="text-blue-600 font-bold">Tomado</span>'}</span>
+                    </td>
+                    
+                    <td class="border-grey-light border md:p-3 ">
+                        <span class="sm:hidden font-bold text-white rounded-sm bg-blue-500 p-4 inline-block" style="width:90px"">Detalles.</span>
+                        <span>${info.sold ? '<span class="text-green-600 font-bold ">Vendido</span>' : '<span class="text-purple-600 font-bold">' + info.status + '</span>'}</span>
+                    </td>
+                `
+            const editBtn = document.createElement('td');
+            editBtn.innerHTML = `
+                    <div class="flex flex-row">
+                    <button class="w-screen sm:w-auto px-4 text-white font-bold py-4 rounded-sm" type="submit">
+                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
+                        </svg>
+                    </button>
+                `;
+
+            row.appendChild(editBtn)
+
+            function assignEvent(token_id){
+                editBtn.addEventListener("click", ()=> {
+                    openActions(token_id)
+                })    
+            }
+            assignEvent(token_id)
+            tableBody.appendChild(row);
+        }
+        statusElement.style.display = 'none'; // hide the status element
+        createPaginationControls(currentPage, totalPages);
+    } catch(error){
+        tableBody.innerHTML = "<p class='text-center font-bold text-red-600'>Error al obtener los tokens!</p>"
+        console.log(error)
+    }
+}
+
+async function apiCall(url, method, token, successCallback, errorCallback) {
+    try {
+        const response = await fetch(url, {
+            method: method,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ token: token })
+        })
+        const data = await response.json()
+        successCallback(data)
+    } catch(error) {
+        errorCallback(error)
+    }
+}
+
+async function unholdToken(token_id) {
+    const token_data = allTokens[token_id]
+    const action_status_msg = document.getElementById("popup-msg")
+    action_status_msg.style.display = "none"
+    console.info("unholding/holding:", token_data.token)
+    const loading = document.getElementById("popup-token-action-spinner")
+    loading.style.display = 'block';
+    await apiCall("{{ url_for('tokens.unhold_token') }}", 'POST', token_data.token, () => {
+        document.getElementById("popup-unhold-button").textContent = "Liberado!"
+        action_status_msg.textContent = "Token liberado"
+        fetchTokens(currentPage)
+    }, error => {
+        console.error('Error:', error)
+        document.getElementById("popup-msg").textContent = error
+    });
+    action_status_msg.style.display = "block"
+    loading.style.display = 'none';
+}
+
+async function deleteToken(token_id) {
+    const token_data = allTokens[token_id]
+    confirmation = genericConfirm("Deseas eliminar el token?")
+    if(!confirmation){return}
+    const loading = document.getElementById("popup-token-action-spinner")
+    await apiCall("{{ url_for('tokens.delete_token') }}", 'DELETE', token_data.token, () => {
+        const popupContainer = document.getElementById(`popup`);
+        popupContainer.style.display = "none";
+        fetchTokens(currentPage)
+    }, error => {
+        console.error('Error:', error)
+        document.getElementById("popup-msg").textContent = error
+    });
+    loading.style.display = 'none';
+}
+
+async function banToken(token_id) {
+    const action_status_msg = document.getElementById("popup-msg")
+    const token_data = allTokens[token_id]
+    action_status_msg.style.display = "none"
+    action_status_msg.textContent  = ""
+    console.info("banning:", token_data.token)
+    const loading = document.getElementById("popup-token-action-spinner")
+    loading.style.display = 'block';
+    await apiCall("{{ url_for('tokens.ban_token') }}", 'POST', token_data.token , ()=> {
+        action_status_msg.style.display = "none"
+        fetchTokens(currentPage).then(() =>{
+            document.getElementById("popup-ban-button").textContent = !token_data.banned? "Habilitar":"Inhabilitar"
+            action_status_msg.textContent = allTokens[token_id].banned?"Token inhabilitado":"Token habilitado nuevamente"
+        })
+        
+    }, error => {
+        console.error('Error:', error)
+        document.getElementById("popup-msg").textContent = error
+    });
+    action_status_msg.style.display = "block"
+    loading.style.display = 'none';
+}
+
+function closeModal(event) {
+        const popupContainer = document.getElementById(`popup`);
+        popupContainer.style.display = "none";
+        document.getElementById("popup-msg").textContent = ""
+        document.getElementById("popup-copy-link-btn").textContent = "Copiar"
+}
+
+function createPaginationControls(currentPage, totalPages) {
+    const paginationControls = document.getElementById('pagination-controls');
+    paginationControls.innerHTML = '';
+
+    for (let i = 1; i <= totalPages; i++) {
+        const button = document.createElement('button');
+        button.textContent = i;
+        button.className = 'px-2 py-1 mx-1 border rounded ' + (i === currentPage ? 'bg-blue-500 text-white' : 'bg-white text-blue-500');
+        button.addEventListener('click', () => { fetchTokens(i) });
+        paginationControls.appendChild(button);
+    }
+}
+
+async function fetchTokens(currentPage){
+    await retrieveAllTokens(currentPage)
+    await renderTokensTable()
+}
+fetchTokens(1)
+</script>
+<style>
+#pagination-controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem; /* Espacio entre los botones */
+}
+
+#pagination-controls button {
+    flex: 0 1 auto; /* Permite que los botones se ajusten y se envuelvan */
+    margin: 0.2rem;
+}
+</style>
+{% endblock %}

@@ -2,14 +2,27 @@
 <html lang="es" >
 <head>
   <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-  <title> Enfoque Fútbol </title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta property="og:image" content="{{ url_for('static', filename='/images/banner.webp') }}" />
-  <meta name="thumbnail" content="{{ url_for('static', filename='/images/banner.webp') }}" />
-  <script src="https://cdn.tailwindcss.com"></script> <!-- 🧑‍🦯-->
-</head>
-<body>
+
+  <!-- HTML Meta Tags -->
+  <title>Enfoque Fútbol</title>
+  <meta name="description" content="Fútbol regional en vivo">
+
+  <!-- Facebook Meta Tags -->
+  <meta property="og:url" content="https://futbol.enfoquezonal.com.ar">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Enfoque Fútbol">
+  <meta property="og:description" content="Fútbol regional en vivo">
+  <meta property="og:image" content="https://futbol.enfoquezonal.com.ar/static/images/banner.webp">
+
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="twitter:domain" content="futbol.enfoquezonal.com.ar">
+  <meta property="twitter:url" content="https://futbol.enfoquezonal.com.ar">
+  <meta name="twitter:title" content="Enfoque Deportes">
+  <meta name="twitter:description" content="Fútbol regional en vivo">
+  <meta name="twitter:image" content="https://futbol.enfoquezonal.com.ar/static/images/banner.webp">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwindcss.css')}}">
   {% block content %}{% endblock %}
-</body>
-</html>

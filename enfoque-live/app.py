@@ -1,10 +1,11 @@
-from flask import Flask, request, redirect, url_for, send_file, make_response
+import os
+import datetime
+
+import redis
+from flask import Flask, request, redirect, url_for, send_file, make_response, render_template
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from jwt.exceptions import ExpiredSignatureError
-import redis
-
-import os, datetime
 
 from utils import configuration
 from utils.limiter import limiter
@@ -14,17 +15,18 @@ from routers.buy import mp_checkout as mp_route
 from routers.admin import admin as admin_route
 from routers.auth import auth as auth_route
 from routers.home import home as home_route
+from routers.tokens import token as tokens_route
 
 from utils.compression import compress_response
 from utils import log, auth
 
 from models.database import db
 
-production_database = 'sqlite:///database.db'
-test_database = 'sqlite:///test_database.db'
+# Configuration
+PRODUCTION_DB = "sqlite:///database.db"
+TEST_DB = "sqlite:///test_database.db"
 
-
-def setup(test=False):
+def create_app(testing=False):
     app = Flask(__name__)
     jwt = JWTManager(app)
     CORS(app)
@@ -35,6 +37,7 @@ def setup(test=False):
     app.register_blueprint(stream_route)
     app.register_blueprint(admin_route)
     app.register_blueprint(home_route)
+    app.register_blueprint(tokens_route)
 
     # init logging handler and lvl
     app.logger.setLevel(log.logging.INFO)
@@ -42,7 +45,7 @@ def setup(test=False):
 
     app.logger.info("EnfoqueFutbol v2.0 started.")
 
-    # set up jwt
+    # Setup JWT
     app.config['JWT_TOKEN_LOCATION'] = ['cookies']
     app.config["SESSION_COOKIE_DOMAIN"] = False
     app.config['JWT_COOKIE_CSRF_PROTECT'] = False
@@ -53,15 +56,29 @@ def setup(test=False):
     app.config['JWT_SESSION_COOKIE'] = False
 
     app.config["WTF_CSRF_CHECK_DEFAULT"] = False
-    app.config["JWT_ACCESS_TOKEN_EXPIRES"] = datetime.timedelta(days=2)
+    app.config["JWT_ACCESS_TOKEN_EXPIRES"] = datetime.timedelta(days=3)
     app.config["JWT_SECRET_KEY"] = configuration.get("secret_key")
 
     app.config['UPLOAD_FOLDER'] = 'static/uploads'
 
-    # set compresssion middleware
-    app.after_request(compress_response)
-
     app.jinja_options["trim_blocks"] = True
+
+    # Compression middleware ( Handled by nginx )
+    # app.after_request(compress_response)
+
+    # Rate limiter 
+    limiter.init_app(app)
+
+    # Database configuration
+    db_uri = TEST_DB if testing else PRODUCTION_DB
+    app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
+    db.init_app(app) 
+
+    # Setup REDIS
+    with app.app_context():
+        app.config['REDIS_CLIENT'] = redis.StrictRedis(
+            host='127.0.0.1', port=6379, db=0
+    )
 
     @app.route('/')
     def index():
@@ -72,29 +89,23 @@ def setup(test=False):
                 return redirect(url_for("admin.panel"))
         return redirect(url_for("mp_checkout.buy"))
     
-    # If the JWT token is expired, unset it.
+    # If the JWT token is expired, unset it and redirect
     @app.errorhandler(ExpiredSignatureError)
     def handle_expired_token_error(error):
+        """
+            TODO: IMPLEMENT A REFRESH
+        """
         response = make_response(redirect(request.url))
         auth.unset_identity(response)
         return response
 
-    @app.errorhandler(404) 
-    def not_found(e): 
-        return redirect("/")
+    #@app.errorhandler(404) 
+    #def not_found(e): 
+    #    return redirect("/")
 
     return app
 
-app = setup()
-# set up db engine
-app.config['SQLALCHEMY_DATABASE_URI'] = production_database
-db.init_app(app)
-
-# setup redis
-app.config['REDIS_CLIENT'] = redis.StrictRedis(host='127.0.0.1', port=6379, db=0)
-
-# setup limiter
-limiter.init_app(app)
+app = create_app()
 
 # Drop and recreate all db
 recreate_db = False
@@ -103,6 +114,11 @@ if recreate_db or os.path.exists("instance/database.db") == False:
         db.drop_all()
         db.create_all()
 
+
+# Force HTTPS behind the proxy
+from werkzeug.middleware.proxy_fix import ProxyFix
+if configuration.get("in_production"):
+    app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=80, debug=True)

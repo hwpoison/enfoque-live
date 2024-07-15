@@ -16,8 +16,8 @@ def login():
         user = request.form.get('user')
         password = request.form.get('password')
 
-        admin_user = configuration.get("admin_user") 
-        admin_password = configuration.get("admin_password")
+        admin_user = configuration.get("admin_user", "credentials") 
+        admin_password = configuration.get("admin_password", "credentials")
 
         if user == admin_user and password == admin_password:
             expires = current_app.config["JWT_ACCESS_TOKEN_EXPIRES"]

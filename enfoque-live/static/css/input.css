@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+  #stream-container {
+  	@apply bg-slate-700;
+  }
+  #stream-lateral-box {
+  	@apply bg-slate-600 bg-opacity-70;
+  }
+  #updates-lateral-box {
+  	@apply bg-slate-800 bg-opacity-50 shadow-inner;
+  }
+  #stream-date {
+  	@apply bg-slate-800 bg-opacity-50 shadow-inner;
+  }
+  #footer {
+  	@apply bg-slate-700 bg-opacity-60;
+  }
+}

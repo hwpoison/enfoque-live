@@ -2,8 +2,9 @@ from app import setup  # Flask instance of the API
 from utils import configuration
 from models.database import db
 from flask import url_for
+import models.tokens as tokens_db
 import pytest
-
+import redis
 db_recreate = False
 
 
@@ -12,6 +13,7 @@ def get_app():
     ctx_app = setup()
     # setup test db
     ctx_app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database_test.db'
+    ctx_app.config['REDIS_CLIENT'] = None # redis.StrictRedis(host='127.0.0.1', port=6379, db=0)
     db.init_app(ctx_app)
     if db_recreate:
         with ctx_app.app_context():
@@ -41,7 +43,8 @@ def test_root_route(client):
     assert response.headers['Location'] == '/comprar'
 
     # Good login
-    good_credentials = {'user': configuration.get("admin_user"), 'password': configuration.get("admin_password")}
+    admin_user, admin_password = "admin", "admin"
+    good_credentials = {'user': admin_user, 'password': admin_password}
     response = client.post('/login', data=good_credentials, follow_redirects=True)
     assert response.status_code == 200
 
@@ -50,17 +53,7 @@ def test_root_route(client):
     assert response.status_code == 302
     assert response.headers['Location'] == '/admin/panel'
 
-
-
-
-
-"""
-def test_buy_endpoint_user_limit_reached(client, monkeypatch):
-    monkeypatch.setattr(configuration, 'get', lambda x: 10)
-    monkeypatch.setattr(tokens_db, 'count_all_sold_tokens', lambda: 11)
-    response = client.get(url_for('mp_checkout.buy'))
-    assert response.status_code == 200
-    assert b"Limite de usuarios alcanzado!" in response.data
-
-    
-    """
+    # Invalid token
+    tokens_db.create_token()
+    response = client.get('/play/jskdjalskdf')
+    assert response.status_code == 404

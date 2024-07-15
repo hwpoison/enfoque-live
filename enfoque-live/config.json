@@ -1,27 +1,41 @@
 {
-    "DEFAULT": {
-        "stream_mode": "rtmp_local",
+    "default": {
         "secret_key": "test_pp",
         "domain": "127.0.0.1",
-        "redis_url": "redis://127.1.0.1:6379",
-        "free_mode": "enabled",
-        "hls_dir": "../rtmp-server/temp/hls_temp/",
-        "hls_key": "stream.m3u8",
-        "in_production": false,
+        "in_production": true,
+        "users_limit": "10"
+    },
+    "purchase": {
         "mercadopago_private_key": "TEST-615284725080787-040606-eceba0d67265fc6f3a7feb1490ff380b-1757435435",
         "mercadopago_public_key": "TEST-27ad9253-5f55-4628-a4dc-11848acc1853",
-        "users_limit": "11",
-        "youtube_id": "jfKfPfyJRdk",
-        "link_price": "2",
-        "stream_title": "Titulo del streamingo",
-        "stream_subtitle": "Enseguida comenzamos.",
-        "stream_date_info": "00:01hs",
-        "admin_user": "admin",
-        "admin_password": "admin",
-        "stream_subtitule": "ssso",
-        "player_poster_image": "/static/uploads/images/poster_y0Ls2Ak.jpg",
+        "link_price": "2001",
+        "free_mode": "disabled",
+        "links_limit": "10"
+    },
+    "stream": {
+        "mode": "rtmp_local",
+        "title": "Boca vs River",
+        "subtitle": "- PRIMER TIEMPO! -",
+        "marquee": "Marquesina",
+        "date": "13.30hs - Reserva <br> 15.30hs - Primera",
+        "player_poster_image": "/static/uploads/images/poster_urvZWjU.jpg",
         "chat_embeded_url": "https://www3.cbox.ws/box/?boxid=",
-        "rtmp_cdn_url": "https://enfoquelivep.b-cdn.net",
-        "youtube_mode": "enabled"
+        "youtube_video_id": "jfKfPfyJRdk",
+        "redis_serve_url": "redis://127.1.0.1:6379",
+        "subtitule": "- PRIMER TIEMPO! -",
+        "date_info": "13.30hs - Reserva <br> 15.30hs - Primera"
+    },
+    "hls": {
+        "default_dir": "../rtmp-server/temp/hls_temp/",
+        "playlist_name": "stream.m3u8"
+    },
+    "credentials": {
+        "admin_user": "admin",
+        "admin_password": "admin"
+    },
+    "cdn": {
+        "url": "https://miapp.b-cdn.neto",
+        "origin_secret": "thisismyoriginsecret",
+        "rtmp_cdn_url": "https://miapp.b-cdn.neto"
     }
 }

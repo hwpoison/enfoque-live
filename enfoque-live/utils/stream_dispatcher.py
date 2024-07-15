@@ -8,9 +8,9 @@ def get_mimetype(file_path: str) -> str:
         Returns the mimetype based on file name
     """
     if file_path.endswith('.m3u8'):
-        return 'application/vnd.apple.mpegurl'
+        return 'application/x-mpegURL'
     elif file_path.endswith('.ts'):
-        return 'video/mp2t'
+        return 'application/x-mpegURL'
     else:
         return 'application/octet-stream'
 

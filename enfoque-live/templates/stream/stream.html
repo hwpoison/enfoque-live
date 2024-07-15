@@ -1,106 +1,119 @@
 {% extends "base.html" %}
 {% block content %}
-<link href="{{ url_for('static', filename='/css/main_stream_player.css') }}" rel="stylesheet" />
-<link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
-<script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
-<div id="all-content" class="animate-fade-in">
-  <!-- Logo -->
-  <div class="flex justify-center rounded-b-lg">
-    <img class="animate-bottom h-16 md:h-24 xs:h-2/4" src="{{ url_for('static', filename='/images/banner.webp') }}">
-  </div>
-  <div class="flex flex-col min-h-screen">
-    <div class="flex flex-col md:flex-row flex-grow gap-4">
-      <!-- Video container -->
-      <div class="rounded-sm bg-slate-700 p-1  bg-opacity-70 md:w-3/4">
-        <!-- <p class="shadow-lg text-white pb-1">📹Transmisión en vivo</p> -->
-        {% if pconfig['stream_mode'] == 'rtmp_cdn' %}
-          <video-js id="stream" class="video-js w-full md:h-full rounded-sm" controls autoplay preload="auto">
-            <source src="{{ pconfig.rtmp_cdn_url }}/get/{{ pconfig.hls_key }}"/>
-            <p class="vjs-no-js">
-              To view this video please enable JavaScript, and consider upgrading to a
-              web browser that
-              <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-            </p>
-          </video-js>
-        {% endif -%}
-
-        {% if pconfig['stream_mode'] == 'youtube_live' %}
-          <!-- youtube live player -->
-          <iframe id="yt-live-frame" width=100% height="90%"
-            src="https://www.youtube.com/embed/{{ pconfig.youtube_id }}?modestbranding=0&autoplay=1&rel=0&showinfo=0&controls=1"
-            title="Enfoque Live Streaming" frameborder="0"
-            allow="accelerometer; autoplay; ; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-          </iframe>
-        {% endif -%}
-
-        {% if pconfig['stream_mode'] == 'rtmp_local' %}
-          <!-- videojs stream player -->
-          <video-js id="stream" class="video-js w-full md:h-full rounded-sm" controls autoplay preload="auto">
-            <source src="/play/{{ token }}/{{ stream_name }}" type="application/vnd.apple.mpegurl"/>
-            <p class="vjs-no-js">
-              To view this video please enable JavaScript, and consider upgrading to a
-              web browser that
-              <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-            </p>
-          </video-js>
+  <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
+  <link href="{{ url_for('static', filename='/js/videojs-hls-quality-selector.css') }}" rel="stylesheet" />
+  <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+  <script src="{{ url_for('static', filename='/js/videojs-hls-quality-selector.min.js') }}"></script>
+  <link href="{{ url_for('static', filename='/css/main_stream_player.css') }}" rel="stylesheet" />
+</head>
+<body>
+  {{ something|safe }}
+  <div id="all-content" class="animate-fade-in">
+    <!-- Logo -->
+    <div id="main-logo" class="flex justify-center rounded-b-lg">
+      <img class="animate-bottom h-16 md:h-24 xs:h-2/4" src="{{ url_for('static', filename='images/banner.webp') }}">
+    </div>
+    <div class="flex flex-col min-h-screen">
+      <div class="flex flex-col md:flex-row flex-grow gap-4">
+        <!-- Video container -->
+        <div id="stream-container" class="rounded-sm md:rounded-lg py-1 md:p-1 md:w-3/4 shadow-xl">
+          <span id="stream-title" class="shadow-lg font-bold text-white cursor-default">{{ pconfig.stream.title }}</span>
+          <!-- <p class="shadow-lg text-white pb-1">📹Transmisión en vivo</p> -->
+          {% if pconfig.stream.mode == 'rtmp_cdn' or pconfig.stream.mode == 'rtmp_local' %}
+            <!-- videojs stream player -->
+            <video-js id="stream" class="video-js vjs-matrix w-full md:h-full rounded-sm" controls autoplay preload="auto">
+              {% if pconfig.stream_mode == 'rtmp_cdn' %}
+                <source src="{{ pconfig.cdn.url }}/get/{{ stream_name }}"/>
+              {% elif pconfig.stream.mode == 'rtmp_local' %}
+                {% if pconfig.default.in_production -%}
+                  <source src="/play/{{ token }}/{{ stream_name }}" type="application/x-mpegURL"/>
+                {% else -%}
+                  <!-- for dev test -->
+                  <source src="https://lnc-kmsp.tubi.video/index.m3u8" type="application/x-mpegURL"/>  
+              {% endif -%}
+              <p class="vjs-no-js">
+                To view this video please enable JavaScript, and consider upgrading to a
+                web browser that
+                <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+              </p>
+              {% endif -%}
+            </video-js>
           {% endif -%}
-        <span id="viewers-counter" class="text-white text-md py-8"></span>
-      </div>
-      <div class="md:w-1/4 md:ml-4">
-        <div class="rounded-sm bg-slate-700 p-2 bg-opacity-70 h-full">
-          {% if pconfig['stream_mode'] == 'youtube_live' %}
-            <!-- Youtube live chat -->
-            <iframe width="100%" style="height:100%"
-              src="https://www.youtube.com/live_chat?v={{ pconfig.youtube_id }}&amp;embed_domain={{ pconfig.domain }}">
+          {% if pconfig.stream.mode == 'youtube_live' %}
+            <!-- youtube live player -->
+            <iframe id="yt-live-frame" width=100% height="90%"
+              src="https://www.youtube.com/embed/{{ pconfig.stream.youtube_video_id }}?modestbranding=0&autoplay=1&rel=0&showinfo=0&controls=1"
+              title="Enfoque Live Streaming" frameborder="0"
+              allow="accelerometer; autoplay; ; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
             </iframe>
-          {% else %}
-            <div>
-              {% if pconfig['stream_title'] %}
-              <!-- Updates view -->
-              <p class="shadow-lg text-white pb-1">📢 Actualizaciones</p>
-              <div class="bg-slate-700 bg-opacity-90 rounded-lg p-3 lg:p-4 mb-2 text-center text-3xl text-white">
-                <span id="stream-title">{{ pconfig['stream_title'] }}</span>
-                <div class="marquee-container">
-                  <p id="stream-subtitle" class="marquee text-white underline decoration-blue-500">{{
-                    pconfig['stream_subtitule'] }}</p>
+          {% endif -%}
+
+          {% if pconfig.stream.mode == 'vimeo_live' %}
+            <!-- vimeo -->
+            <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://vimeo.com/event/4288566/embed/interaction" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div>
+          {% endif -%}
+          <span id="viewers-counter" class="text-white text-sm md:text-md cursor-default"></span>
+        </div>
+        <div class="md:w-1/4 md:ml-4">
+          <div id="stream-lateral-box" class="rounded-sm md:rounded-md p-2 h-full">
+            {% if pconfig.stream.mode == 'youtube_live' %}
+              <!-- Youtube live chat -->
+              <iframe width="100%" style="height:600px"
+                src="https://www.youtube.com/live_chat?v={{ pconfig.stream.youtube_video_id }}&amp;embed_domain={{ pconfig.default.domain }}">
+              </iframe>
+            {% else %}
+              <div>
+                {% if pconfig.stream.title %}
+                <!-- Updates view -->
+                <p class="shadow-lg text-white font-light cursor-default">📢Actualizaciónes</p>
+                <div id="updates-lateral-box" class="cursor-default rounded-sm p-1 lg:p-4 mb-1 text-2xl text-white">
+                  
+                  {%if pconfig.stream.subtitle %}
+                  <div class="marquee-container">
+                      <p id="stream-subtitle" class="marquee font-light text-md text-white cursor-default decoration-orange-500">{{ pconfig.stream.subtitle }}</p>
+                  </div>
+                  {% endif -%}
+              </div>
+              {% endif -%}
+              <span class="text-white">⌚Horario</span>
+              <div id="stream-date" class="rounded-b-lg cursor-default mx-2 p-2 text-center text-md text-white">
+                {{ pconfig.stream.date }}
               </div>
             </div>
-            {% endif %}
-            {% if pconfig['stream_date_info'] %}
-            <div id="stream-date" class="bg-slate-800 rounded-b-lg bg-opacity-90 mx-8 p-3 lg:p-4 text-center text-xl text-white">
-              {{ pconfig['stream_date_info'] }}
-            </div>
+            <!-- CBOX chatbox -->
+            <p class="text-white pt-2 mt-1 font-light"C>💬Chat público</p>
+            <iframe src="{{ pconfig.stream.chat_embeded_url }}" width="100%" height="450"
+              allowtransparency="yes" allow="autoplay" frameborder="0" marginheight="0" marginwidth="0"
+              scrolling="auto" class="md:mt-1"></iframe>
             {% endif -%}
           </div>
-          <!-- CBOX chatbox -->
-          <p class="shadow-lg text-white pt-2 font-bold mt-8 pb-1">💬Chat publico</p>
-          <iframe src="{{ pconfig.chat_embeded_url }}" width="100%" height="450"
-            allowtransparency="yes" allow="autoplay" frameborder="0" marginheight="0" marginwidth="0"
-            scrolling="auto"></iframe>
-          {% endif -%}
         </div>
       </div>
+      <!-- Footer -->
+      <footer id="footer" class="rounded-md shadow m-4 mt-10 cursor-default">
+        <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+          <span class="text-sm text-white sm:text-center ">© 2024 <span class="hover:underline">Enfoque Zonal</span>.
+            Argentina
+          </span>
+          <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-white sm:mt-0">
+            <li><a href="https://enfoquezonal.com.ar/" target="_blank" class="hover:underline me-4 md:me-6">Sitio
+                oficial</a></li>
+            <li><a href="https://wa.link/ldbqq3" target="_blank" class="hover:underline">Whatsapp</a></li>
+          </ul>
+        </div>
+      </footer>
     </div>
-    <!-- Footer -->
-    <footer class="rounded-lg bg-slate-700 bg-opacity-70 shadow m-4 mt-10">
-      <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
-        <span class="text-sm text-white sm:text-center ">© 2024 <span class="hover:underline">by Enfoque Zonal</span>.
-          Argentina
-        </span>
-        <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-white sm:mt-0">
-          <li><a href="https://enfoquezonal.com.ar/" target="_blank" class="hover:underline me-4 md:me-6">Sitio
-              oficial</a></li>
-          <li><a href="https://wa.link/ldbqq3" target="_blank" class="hover:underline">Whatsapp</a></li>
-        </ul>
-      </div>
-    </footer>
   </div>
-</div>
-<div id="loader"><img src="{{ url_for('static', filename='images/banner.webp') }}"></div>
+  <div id="loader"><img src="{{ url_for('static', filename='images/banner.webp') }}"></div>
+</body>
 <script>
-  var streamSourceURL = {% if pconfig['stream_mode'] == 'rtmp_local' %} "/play/{{ token }}/{{ stream_name }}" {% elif pconfig['stream_mode'] == 'rtmp_cdn' %} "{{ pconfig['rtmp_cdn_url'] }}/get/{{ pconfig['hls_key'] }}" {% else %} "" {% endif %}
-  
+  {% if pconfig.stream.mode == 'rtmp_local' %} 
+    var streamSourceURL = "/play/{{ token }}/{{ stream_name }}" 
+  {% elif pconfig.stream.mode == 'rtmp_cdn' %} 
+    var streamSourceURL = "{{ pconfig.cdn.url }}/get/{{ pconfig.hls.playlist_name }}" 
+  {% endif -%} 
+  var statusURL = '/status/{{ token }}'
   var allReady = false;
   function showGUI(){
       document.getElementById("loader").style.display = "none";
@@ -110,6 +123,7 @@
   // page load indicator
   window.addEventListener("load", function () {
     showGUI()
+    pingStatus()
     allReady = true
   });
 
@@ -117,22 +131,28 @@
   setTimeout(function() {
     if (!allReady) {
       showGUI()
+      pingStatus()
     }
   }, 3000);
 
+  
   stream_settings = {
-      type: 'application/vnd.apple.mpegurl',
+      type: 'application/x-mpegURL',
+      preload:'auto',
+      controls: true,
       src: streamSourceURL,
       autoplay: true,
       responsive: true,
       liveui: true,
-      poster:"{{ pconfig.player_poster_image }}",
-      // muted: true, // to start automatically but muted
+      poster:"{{ pconfig.stream.player_poster_image }}",
+      //muted: true, // to start automatically but muted
       liveTracker:{
-        trackingThreshold : 5
+        trackingThreshold : 6
       }
   }
   var player = videojs('stream', stream_settings);
+  
+  player.hlsQualitySelector();
 
   // reload player src and status
   function refreshPlayer() {
@@ -145,10 +165,10 @@
     let Interval;
     document.querySelector(".vjs-modal-dialog-content").innerText = "Parece ser que aún no hay una transmisión en curso, cuando la haya, esta se reproducirá automaticamente"
     Interval = setInterval(() => {
-      fetch('/status/{{ token }}')
+      fetch(statusURL)
       .then(response => response.json())
       .then(data => {
-        if(data.status == 'online'){
+        if(data.stream.status == 'online'){
           refreshPlayer()
           clearInterval(Interval)
         }
@@ -170,8 +190,13 @@
 
   // refresh dynamic content
   function refreshContent(data){
-    stream_status = data.status == 'online'
+    is_online = data.stream.status == 'online'
+    current_viewers = data.stream.current_viewers
     
+    if (data.stream.cdnURL !== undefined && data.stream.cdnURL !== streamSourceURL) {
+      streamSourceURL = data.stream.cdnURL
+      player.src(streamSourceURL)
+    }
     // update poster
     if(player.poster_ != data.event_info.player_poster_image){
       player.poster(data.event_info.player_poster_image)
@@ -184,7 +209,7 @@
 
     // update viewers counter
     counter = document.getElementById("viewers-counter")
-    new_text = `${data.event_info.current_viewers} persona${(data.event_info.current_viewers > 1) ? "s" : ""} ${!stream_status ? ' en espera' : 'mirando'} ahora mismo`
+    new_text = `${current_viewers} persona${(current_viewers > 1) ? "s" : ""} ${is_online ? 'mirando':' en espera'} ahora mismo`
 
     if (counter.innerHTML !== new_text) {
       counter.classList.remove('show')
@@ -197,7 +222,7 @@
 
   // streaming status
   function pingStatus() {
-    fetch('/status/{{ token }}')
+    fetch(statusURL)
       .then(response => response.json())
       .then(data => {
         refreshContent(data)
@@ -205,7 +230,7 @@
       .catch(error => console.error('Error al obtener el estado del streaming:', error));
   }
   setInterval(pingStatus, 10 * 1000);
-  pingStatus()
+  
 </script>
 <!-- Saludos intruso.  👋🙂 -->
 <!-- made by hwpoison with 🐍 on 2024 --> 

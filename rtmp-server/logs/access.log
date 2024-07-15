@@ -1,0 +1,10 @@
+127.0.0.1 [25/Apr/2024:16:02:13 -0300] PUBLISH "hls" "stream" "" - 184761834 529 "" "FMLE/3.0 (compatible; FMSc/1.0)" (6m 39s)
+127.0.0.1 - - [25/Apr/2024:22:32:45 -0300] "GET / HTTP/1.1" 200 5 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0"
+127.0.0.1 - - [25/Apr/2024:22:32:45 -0300] "GET / HTTP/1.1" 200 5 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0"
+127.0.0.1 - - [25/Apr/2024:22:32:45 -0300] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0"
+127.0.0.1 - - [25/Apr/2024:22:32:46 -0300] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0"
+127.0.0.1 - - [25/Apr/2024:22:32:46 -0300] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0"
+127.0.0.1 - - [25/Apr/2024:22:32:46 -0300] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0"
+127.0.0.1 - - [25/Apr/2024:22:32:47 -0300] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0"
+127.0.0.1 - - [25/Apr/2024:22:32:47 -0300] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0"
+127.0.0.1 - - [25/Apr/2024:22:32:47 -0300] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0"

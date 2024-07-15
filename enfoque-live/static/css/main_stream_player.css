@@ -24,7 +24,7 @@
 }
 
 body {
-  background-image: url('/static/images/default_dark_background.webp');
+  background-image: url('/static/images/background_slate_2.webp');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -32,7 +32,7 @@ body {
 
 @media (min-width: 768px) {
   #stream {
-    height: 95%;
+    height: 92%;
   }
   #yt-live-frame {
     height: 600px;
@@ -124,4 +124,18 @@ body {
 @keyframes animate-fade-in { 
   from{ opacity:0 } 
   to{ opacity:1 }
+}
+
+
+/* VideoJS Custom modifications */
+.vjs-control-bar {
+  background-color: #334155 !important;
+}
+
+div.vjs-modal-dialog-content  {
+  @apply text-black;
+  color:white;
+  font-weight:bold;
+  -webkit-text-stroke-width: 0.3px;
+  -webkit-text-stroke-color: black;
 }

@@ -1,11 +1,11 @@
 from flask import Blueprint, jsonify, render_template, request, current_app, redirect, url_for, current_app, make_response
 
-import hashlib
-import os
+import hashlib, os
 from utils import auth, tokens
 from utils import configuration
 from utils import stream_dispatcher 
 from models import tokens as tokens_db
+from models import viewers
 
 from utils.limiter import limiter
 stream = Blueprint('stream', __name__)
@@ -17,9 +17,14 @@ def monitorig(chunk_name=None):
     return stream_dispatcher.send_chunk(chunk_name)
 
 
-@stream.route('/get/<chunk_name>')
+@stream.route(f'/get/{configuration.get("cdn_origin_secret_token", "cdn")}/<chunk_name>')
 def stream_playlist(chunk_name=None):
-    return stream_dispatcher.send_chunk(chunk_name)
+    response = stream_dispatcher.send_chunk(chunk_name)
+    if chunk_name.endswith('.m3u8'):
+        response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+        response.headers['Pragma'] = 'no-cache'
+        response.headers['Expires'] = '0'
+    return response
 
 
 @stream.route('/status/<stream_token>')
@@ -31,37 +36,33 @@ def stream_status(stream_token: str):
     :param stream_token: The stream token
 
     """
+    playlist_location = f"{configuration.get('default_dir', 'hls')}{configuration.get('playlist_name', 'hls')}"
     try:
-        # register/refresh the view
-        redis_client = current_app.config['REDIS_CLIENT']
-        redis_client.setex(f"active_user:{stream_token}", 10, 'active')
-        playlist_location = f"{configuration.get('hls_dir')}{configuration.get('hls_key')}"
-
-        # count total viewers but only each 10 secs to avoid a bunch of simultaneous scan_iter
-        if not redis_client.exists("viewers_count_lock"):
-            viewers = 0
-            for _ in redis_client.scan_iter('active_user*'):
-                viewers+=1
-            redis_client.set("total_current_viewers", viewers)
-            redis_client.setex("viewers_count_lock", 10, 1)
-
-        total_current_viewers = int(redis_client.get("total_current_viewers") or 0)
-
+        viewers.i_am_watching(stream_token)
+        total_current_viewers = viewers.get_current_viewers()
         status_info = {
             "event_info":{
-                'stream_title': configuration.get('stream_title'), 
-                "stream_date_info": configuration.get('stream_date_info'),
-                "stream_subtitle": configuration.get('stream_subtitule'),
-                "player_poster_image": configuration.get('player_poster_image'),
-                'current_viewers': total_current_viewers
+                'stream_title': configuration.get('title', 'stream'), 
+                "stream_date_info": configuration.get('date_info', 'stream'),
+                "stream_subtitle": configuration.get('subtitule', 'stream'),
+                "player_poster_image": configuration.get('player_poster_image', 'stream'),
+            },
+            "stream":{
+                'current_viewers': total_current_viewers,
             }
         }
 
+        # If the playlist exists, means that currently there is a streaming in progress
         if os.path.exists(playlist_location):
-            status_info['status'] = "online"
+            status_info['stream']['status'] = "online"
         else:
-            status_info['status'] = "offline"
+            status_info['stream']['status'] = "offline"
 
+        # runtime cdn change
+        stream_mode = configuration.get('mode', 'stream')
+        if stream_mode == 'rtmp_cdn':
+             status_info['stream']['cdnURL'] = f"{configuration.get('rtmp_cdn_url', 'cdn')}/get/{configuration.get('playlist_name', 'hls')}"
+        
         return jsonify(status_info), 200
     except Exception as e:
             current_app.logger.error(f"Error getting stream status: {e}")
@@ -79,7 +80,7 @@ def play(stream_token, chunk_name=None):
     :return: A response object redirecting to the stream or an error page
     """
     play_id = tokens.generate_error_id()
-    hls_key = configuration.get("hls_key")
+    hls_key = configuration.get("playlist_name", 'hls')
 
     # Generate the request footprint
     remote_ip_address = request.remote_addr
@@ -131,12 +132,12 @@ def play(stream_token, chunk_name=None):
     if token_data.footprint == identity_footprint \
         or token_data.footprint == footprint \
             or identity_role == "admin" \
-                or configuration.get('free_mode') == 'enabled':
+                or configuration.get('free_mode', 'purchase') == 'enabled':
         if chunk_name:
             return stream_dispatcher.send_chunk(chunk_name)
         else:  # Serve the main view / playlist
             current_app.logger.info(f"[{play_id}] Serving playlist to { current_identity } for '{ token_data.token }' stream")
-            return render_template('stream/stream.html', token=stream_token, stream_name=hls_key, pconfig=configuration.get_vars()['DEFAULT'])
+            return render_template('stream/stream.html', token=stream_token, stream_name=hls_key, pconfig=configuration.get_vars())
     else:
         current_app.logger.info(f"[{play_id}] [{ remote_ip_address }]  with '{ current_identity }' footprint, tried to use the token '{ stream_token }' but isn't the owner.")
         return render_template('generic_advertence.html', 

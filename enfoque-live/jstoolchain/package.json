@@ -1,0 +1,23 @@
+{
+  "name": "jstoolchain",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tailwind-watch": "tailwindcss -i ../static/css/input.css -o ../static/css/tailwindcss.css --watch",
+    "tailwind-build": "tailwindcss -i ../static/css/input.css -o ../static/css/tailwindcss.css --minify",
+    "video": "videojs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.3",
+    "video.js": "^8.12.0"
+  },
+  "dependencies": {
+    "flowbite": "^2.3.0",
+    "videojs-hls-quality-selector": "^2.0.0"
+  }
+}

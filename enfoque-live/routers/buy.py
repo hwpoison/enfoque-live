@@ -7,22 +7,27 @@ from models import tokens as tokens_db
 
 mp_checkout = Blueprint('mp_checkout', __name__)
 
-MP_PUBLIC_KEY = configuration.get('mercadopago_public_key')
-MP_PRIVATE_KEY = configuration.get("mercadopago_private_key")
+MP_PUBLIC_KEY = configuration.get('mercadopago_public_key', 'purchase')
+MP_PRIVATE_KEY = configuration.get("mercadopago_private_key", 'purchase')
 
 SDK = mercadopago.SDK(MP_PRIVATE_KEY)
+
+"""
+When a user make a buy attempt (/comprar), the backend generates a token (get_preference) that will be
+approved when the user buy is successfull returing to the token approval (/approval/) 
+"""
 
 @mp_checkout.route('/comprar')
 def buy():
     try:
-        user_limit = int(configuration.get("users_limit"))
-        if tokens_db.count_all_sold_tokens() >= user_limit:
-            current_app.logger.warning(f"Users limit reached! { user_limit }")
+        links_limit = int(configuration.get("links_limit", 'purchase'))
+        if tokens_db.count_all_sold_tokens() >= links_limit:
+            current_app.logger.warning(f"Users limit reached! { links_limit }")
             return render_template("generic_advertence.html", 
                                 title="¡Limite de usuarios alcanzado!", 
                                 message="Lo sentimos, se superó el limite de usuarios y ya no hay más cupos.")
         current_app.logger.info(f"Buy attempt from '{request.remote_addr}' started.")
-        return render_template("purchase/buy.html", public_key=MP_PUBLIC_KEY)
+        return render_template("purchase/buy.html", pconfig=configuration.get_vars(), public_key=MP_PUBLIC_KEY)
     except Exception as e:
         current_app.logger.error(f"Error during token approval: {e}")
         return render_template("generic_advertence.html", 
@@ -87,7 +92,7 @@ def get_preference():
                 {
                     "title": "Link Enfoque Live",
                     "quantity": 1,
-                    "unit_price": float(configuration.get("link_price"))
+                    "unit_price": float(configuration.get("link_price", 'purchase'))
                 }
             ],
             "back_urls": {

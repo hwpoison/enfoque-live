@@ -1,0 +1,18 @@
+2024/04/25 15:55:00 [notice] 9020#13624: using the "select" event method
+2024/04/25 15:55:00 [notice] 9020#13624: nginx/1.14.1
+2024/04/25 15:55:00 [info] 9020#13624: OS: 260210 build:9200, "Service Pack 1", suite:300, type:1
+2024/04/25 15:55:00 [notice] 9020#13624: start worker processes
+2024/04/25 15:55:00 [notice] 9020#13624: start worker process 14484
+2024/04/25 15:55:00 [notice] 14484#6240: nginx/1.14.1
+2024/04/25 15:55:00 [info] 14484#6240: OS: 260210 build:9200, "Service Pack 1", suite:300, type:1
+2024/04/25 15:55:00 [notice] 14484#6240: create thread 10232
+2024/04/25 15:55:00 [notice] 14484#6240: create thread 304
+2024/04/25 15:55:00 [notice] 14484#6240: create thread 8916
+2024/04/25 15:55:33 [info] 14484#10232: *1 client connected '127.0.0.1'
+2024/04/25 15:55:33 [info] 14484#10232: *1 connect: app='hls' args='' flashver='FMLE/3.0 (compatible; FMSc/1.0)' swf_url='rtmp://127.0.0.1/hls' tc_url='rtmp://127.0.0.1/hls' page_url='' acodecs=0 vcodecs=0 object_encoding=0, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/04/25 15:55:33 [info] 14484#10232: *1 createStream, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/04/25 15:55:34 [info] 14484#10232: *1 publish: name='stream' args='' type=live silent=0, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/04/25 16:02:13 [info] 14484#10232: *1 deleteStream, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/04/25 16:02:13 [info] 14484#10232: *1 WSARecv() failed (10053: An established connection was aborted by the software in your host machine), client: 127.0.0.1, server: 0.0.0.0:1935
+2024/04/25 16:02:13 [info] 14484#10232: *1 disconnect, client: 127.0.0.1, server: 0.0.0.0:1935
+2024/04/25 16:02:13 [info] 14484#10232: *1 deleteStream, client: 127.0.0.1, server: 0.0.0.0:1935

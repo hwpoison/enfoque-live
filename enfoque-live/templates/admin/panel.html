@@ -1,283 +1,50 @@
 {% extends "base.html" %}
 {% block content %}
-<center>
-    <!-- mode setup -->
-    <p class="font-bold mb-2">📌 Modo de streaming actual</p>
-    {% if pconfig.stream_mode == 'youtube_live' %}
-        <p class="text-green-600 font-bold">Youtube</p>
-    {% elif pconfig.stream_mode == 'rtmp_local' %}
-        <p class="text-red-600 font-bold">RTMP / HLS (Defecto)</p>
-    {% elif pconfig.stream_mode == 'rtmp_cdn' %}
-        <p class="text-purple-600 font-bold">RTMP CDN</p>
-    {% endif %}
-    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold p-3 px-4 rounded"
-        onclick="window.open('{{ url_for('admin.monitor')}}', '_blank')">Monitorear transmisión</button>
-    <hr class="mt-4">
-    <!-- misc configuration -->
-    <p class="font-bold py-5">⚙️ Gestión de configuraciónes</p>
-    <form id="config-update-form" action="/update_config" method="post" class="w-full max-w-sm">
-        <div class="md:flex md:items-center mb-6">
-            <div class="md:w-1/3">
-                <label class="block" for="youtube_id">Youtube Live ID:</label>
-            </div>
-            <div class="md:w-2/3">
-                <input type="text" placeholder="ID Youtube" id="youtube_id" name="youtube_id"
-                    value="{{ pconfig.youtube_id }}" class="outline outline-2 outline-slate-200 rounded-lg p-3">
-            </div>
-        </div>
-        <div class="md:flex md:items-center mb-6">
-            <div class="md:w-1/3">
-                <label class="block" for="youtube_id">CDN URL:</label>
-            </div>
-            <div class="md:w-2/3">
-                <input type="text" placeholder="ID Youtube" id="rtmp_cdn_url" name="rtmp_cdn_url"
-                    value="{{ pconfig.rtmp_cdn_url }}" class="outline outline-2 outline-slate-200 rounded-lg p-3">
-            </div>
-        </div>
-        <div class="md:flex md:items-center mb-6">
-            <div class="md:w-1/3">
-                <label for="estado">Streaming mode:</label>
-            </div>
-            <div class="md:w-2/3">
-                <select id="estado" class="p-2" name="stream_mode">
-                        <option value="youtube_live"  {% if pconfig.stream_mode == 'youtube_live' %} selected {% endif %}>Youtube Live</option>
-                        <option value="rtmp_local" {% if pconfig.stream_mode == 'rtmp_local' %} selected {% endif %}>RTMP Local</option>
-                        <option value="rtmp_cdn" {% if pconfig.stream_mode == 'rtmp_cdn' %} selected {% endif %}>RTMP CDN</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="md:flex md:items-center mb-6">
-            <div class="md:w-1/3">
-                <label for="estado">Acceso gratis:</label>
-            </div>
-            <div class="md:w-2/3">
-                <select id="estado" class="p-2" name="free_mode">
-                    {% if pconfig.free_mode == 'enabled' %}
-                        <option value="enabled" selected>Activado</option>
-                        <option value="disabled">Desactivado</option>
-                    {% else %}
-                        <option value="enabled">Activado</option>
-                        <option value="disabled" selected>Desactivado</option>
-                    {% endif %}
-                </select>
-            </div>
-        </div>
-
-        <div class="md:flex md:items-center mb-6">
-            <div class="md:w-1/3">
-                <label for="estado">Cupo máximo links:</label>
-            </div>
-            <div class="md:w-2/3">
-                <label for="limitusers" class="p-2">
-                <input type="number" id="numero" class="outline outline-2 outline-slate-200 rounded-lg p-3" name="users_limit" value="{{ pconfig.users_limit }}">
-            </div>
-        </div>
-        <div class="md:flex md:items-center mb-6">
-            <div class="md:w-1/3">
-                <label for="estado">Precio del link:</label>
-            </div>
-            <div class="md:w-2/3">
-                <label for="limitusers" class="p-2">
-                    <input type="number" id="numero" class="outline outline-2 outline-slate-200 rounded-lg p-3" name="link_price" value="{{ pconfig.link_price }}">
-            </div>
-        </div>
-
-        <div class="md:flex md:items-center mb-6">
-            <div class="md:w-1/3">
-                <label for="estado">Poster:</label>
-            </div>
-            <div class="md:w-2/3">
-                <input placeholder="asda" type="file" accept="image/*" name="player_poster_image">
-            </div>
-        </div>
-        <div class="md:flex md:items-center mb-6">
-            <div class="md:w-1/3">
-                <label for="estado">Titulo streaming:</label>
-            </div>
-            <div class="md:w-2/3">
-                <label for="limitusers" class="p-2">
-                    <input type="text" id="numero" list="titulos" class="outline outline-2 outline-slate-200 rounded-lg p-3"
-                        name="stream_title" value="{{ pconfig.stream_title }}">
-                    <datalist id="titulos">
-                      <option value="- Primer tiempo -">Primer tiempo</option>
-                      <option value="- Entretiempo - ">Entretiempo</option>
-                      <option value="- Segunto tiempo -">Segunto tiempo</option>
-                    </datalist>
-            </div>
-        </div>
-
-        <div class="md:flex md:items-center mb-6">
-            <div class="md:w-1/3">
-                <label for="estado">Subtitulo/Marquesina:</label>
-            </div>
-            <div class="md:w-2/3">
-                <label for="limitusers" class="p-2">
-                    <input type="text" id="numero" class="outline outline-2 outline-slate-200 rounded-lg p-3" name="stream_subtitule" value="{{ pconfig.stream_subtitule }}">
-            </div>
-        </div>
-
-        <div class="md:flex md:items-center mb-6">
-            <div class="md:w-1/3">
-                <label for="estado">Horario streaming:</label>
-            </div>
-            <div class="md:w-2/3">
-                <label for="limitusers" class="p-2">
-                    <input type="text" id="numero" class="outline outline-2 outline-slate-200 rounded-lg p-3" name="stream_date_info" value="{{ pconfig.stream_date_info }}">
-                    </select>
-            </div>
-        </div>
-
-        <div class="">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Actualizar configuración</button>
-        </div>
-    </form>
-    <hr class="mt-4">
-
-    <!-- link manage -->
-    <div id="actions-section"/>
-    <p class="font-bold py-5">🔗 Gestion de enlaces</p>
-    <div class="">
-        <form id="token_action_form" action="{{ url_for('admin.token_action') }}" method="post">
-            <input type="text" placeholder="Nombre (Opcional)" id="alias" name="alias"
-                class="outline outline-2 outline-slate-200 rounded-lg p-3">
-            <select id="token_action" class="p-2" name="select_action">
-                <option selected disabled>Seleccionar acción</option>
-                <option value="create">Crear enlace</option>
-                <option value="delete">Eliminar por nombre</option>
-                <option value="delete_all">Eliminar todos</option>
-                <!-- <option value="restore_from_backup">Restaurar backup</option> -->
-            </select>
-            <button id="conform-action" class="bg-blue-500 hover:bg-blue-700 text-white font-bold p-3 px-4 rounded" type="submit" onclick="return genericConfirm('¿Estás seguro que quieres realizar esta acción?')">Confirmar</button>
-        </form>
-        {% if action_msg != None %}
-            {% if action_msg.lower().startswith("error") %}
-                <p style="color: red;">{{ action_msg }}</p>
-            {% elif action_msg.lower() %}
-                <p style="color: green;">{{ action_msg }}</p>
-            {% endif %}
-        {% endif %}
+<center class="p-4">
+<div class="bg-white shadow-md rounded p-4">
+  <h2 class="text-xl font-bold mb-4"> 🎛️ Administración</h2>
+  <hr class="my-5">
+  <a href="{{ url_for('admin.configurations') }}">
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4">
+      Configuraciones
+    </button>
+  </a>
+  <a href="{{ url_for('admin.link_manager') }}">
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      Administrar links
+    </button>
+  </a>
+  <hr class="my-4">
+  <h3 class="text-xl font-bold mb-4">🧮 Métricas</h3>
+  <div class="flex justify-center mb-4 lg:flex-row flex-col">
+    <div class="lg:w-1/2 xl:w-1/3">
+      <h4 class="text-sm font-bold">Espectadores actuales:</h4>
+      <p class="text-2xl font-bold">{{ misc.total_current_viewers }}</p>
     </div>
-    <div class="flex content-center">
-        <hr class="py-5">
-        <div class="container mb-32 mt-8">
-            {% if data %}
-            <table class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg w-screen overflow-hidden sm:shadow-lg">
-                <thead class="text-white">
-                    {% for token, info in data.items() %}
-                    <tr
-                        class="bg-blue-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
-                        <th class="p-3 text-left">Nombre</th>
-                        <th class="p-3 text-left">Token</th>
-                        <th class="p-3 text-left">Disponibilidad</th>
-                        <th class="p-3 text-left">Detalles</th>
-                        <th class="p-3 text-left" height="102px" width="120px">Acciones</th>
-                    </tr>
-                    {% endfor %}
-                </thead>
-                <tbody class="flex-1 sm:flex-none">
-                    {% for token, info in data.items() %}
-                    <tr class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0 text-left">
-                        <td id="{{ token }}" class="border-grey-light border hover:bg-gray-100 p-3">{{ info['name'] }}</td>
-                        <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">
-                            <a class="oveflow-scroll" href="{{ url_for('index', _external=True) }}play/{{ token }}" target="_blank">
-                                {{ token }}
-                            </a>
-                        </td>
-                        <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">
-                            {% if info['banned'] %}
-                                <p class="text-green-600 font-bold">Inhabilitado</p>
-                            {% elif info['footprint'] == None %}
-                                <p class="text-green-600 font-bold">Libre</p>
-                            {% else %}
-                                <p class="text-blue-600 font-bold">Tomado</p>
-                            {% endif %}
-                        </td>
-                        <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">
-                            {% if info["sold"] %}
-                                <p class="text-green-600 font-bold">Vendido</p>
-                            {% else %}
-                                <p class="text-purple-600 font-bold"> {{ info["status"] }}</p>
-                            {% endif %}
-                        </td>
-                        <td class="md:flex">
-                            <form action="{{ url_for('admin.unhold_token') }}" method="post">
-                                <input type="hidden" name="token" value="{{ token }}">
-                                <button
-                                    class="text-left border-grey-light border p-3 text-white rounded-lg text-center font-bold cursor-pointer bg-blue-400 hover:bg-blue-700 transition duration-400"
-                                    type="submit"
-                                    onclick="return genericConfirm('¿Liberar este enlace?')">Liberar</button>
-                            </form>
-                            <form action="{{ url_for('admin.ban_token') }}" method="post">
-                                <input type="hidden" name="token" value="{{ token }}">
-                                    <button
-                                        class=" border-grey-light border p-3 text-white rounded-lg text-center font-bold cursor-pointer bg-red-400 hover:bg-red-700 transition duration-400"
-                                        type="submit"
-                                        onclick="return genericConfirm('¿Banear este enlace?')">{% if info['banned'] %} Habilitar {% else %} Inhabilitar {% endif %}
-                                    </button>
-                            </form>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            {% else %}
-            <h4 class="text-gray-700 text-center font-bold py-10">🧐 Aún no se han creado enlaces</h4>
-            {% endif %}
-        </div>
+    <div class="lg:w-1/2 xl:w-1/3">
+      <h4 class="text-sm font-bold">Links vendidos:</h4>
+      <p class="text-2xl font-bold">{{ misc.all_sold_tokens }}</p>
     </div>
-    <div id="end-of-page"/>
+  </div>
+  <hr class="my-5">
+  <!-- mode setup -->
+  <p class="text-xl font-bold mb-4">📌 Modo de streaming actual</p>
+  {% if pconfig.stream.mode == 'youtube_live' %}
+    <p class="text-green-600 font-bold">Youtube</p>
+  {% elif pconfig.stream.mode == 'vimeo_live' %}
+    <p class="text-red-600 font-bold">Vimeo</p>
+  {% elif pconfig.stream.mode == 'rtmp_local' %}
+    <p class="text-red-600 font-bold">RTMP / HLS (Defecto)</p>
+  {% elif pconfig.stream_mode == 'rtmp_cdn' %}
+    <p class="text-purple-600 font-bold">RTMP CDN</p>
+  {% endif %}
+  <button class="bg-orange-500 hover:bg-orange-700 text-white font-bold p-2 px-4 rounded"
+    onclick="window.open('{{ url_for('admin.monitor')}}', '_blank')">Monitorear transmisión</button>
+</div>
 </center>
 <script>
-document.getElementById('token_action_form').addEventListener('submit', function (event) {
-    var selectValue = document.getElementById('token_action');
-    if (selectValue.value == '' || selectValue.selectedIndex == 0) {
-        event.preventDefault();
-        alert('Por favor, selecciona una acción.');
-        return
-    }
-});
-function genericConfirm(msg) { return confirm(msg) }
-document.getElementById('config-update-form').addEventListener('submit', function (event) {
-    event.preventDefault();
-    fetch("{{ url_for('admin.update_config') }}", {
-        method: 'POST',
-        body: new FormData(document.getElementById('config-update-form'))
-    }).then(function (response) {
-        if (response.ok) {
-            alert("Configuración actualizada correctamente!")
-            location.reload();
-        } else {
-            console.error('Error en la solicitud:', response.statusText);
-        }
-    }).catch(function (error) {
-        console.error('Error:', error);
-    });
-});
+setInterval(function() {
+  location.reload();
+}, 10000);
 </script>
-<style>
-    html,
-    body {
-        height: 100%;
-    }
-
-    @media (min-width: 640px) {
-        table {
-            display: inline-table !important;
-        }
-
-        thead tr:not(:first-child) {
-            display: none;
-        }
-    }
-
-    td:not(:last-child) {
-        border-bottom: 0;
-    }
-
-    th:not(:last-child) {
-        border-bottom: 2px solid rgba(0, 0, 0, .1);
-    }
-</style>
-<!-- This was made in 1 day -->
 {% endblock %}
